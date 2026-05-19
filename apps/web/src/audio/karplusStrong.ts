@@ -81,3 +81,11 @@ export async function playNote(stringIndex: number, fret: number): Promise<void>
   const audioCtx = await resume();
   synthNote(audioCtx, stringFrequency(stringIndex, fret), audioCtx.currentTime + 0.02);
 }
+
+export async function playNoteSequence(notes: [number, number][], noteDelay = 0.38): Promise<void> {
+  const audioCtx = await resume();
+  const now = audioCtx.currentTime + 0.05;
+  notes.forEach(([si, fret], i) => {
+    synthNote(audioCtx, stringFrequency(si, fret), now + i * noteDelay);
+  });
+}

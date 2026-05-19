@@ -25,6 +25,7 @@ const QUALITIES: Array<{ label: string; suffix: string }> = [
 
 interface ChordBuilderProps {
   onSubmit: (chord: string) => void;
+  onClear: () => void;
 }
 
 function Chip({
@@ -55,7 +56,7 @@ function Chip({
   );
 }
 
-export function ChordBuilder({ onSubmit }: ChordBuilderProps) {
+export function ChordBuilder({ onSubmit, onClear }: ChordBuilderProps) {
   const [root, setRoot] = useState<string | null>(null);
   const [quality, setQuality] = useState<string | null>(null);
   const [bass, setBass] = useState<string | null>(null);
@@ -73,16 +74,22 @@ export function ChordBuilder({ onSubmit }: ChordBuilderProps) {
       setRoot(null);
       setQuality(null);
       setBass(null);
+      onClear();
     } else {
       setRoot(note);
       setBass(null);
-      // quality сохраняется — useEffect сразу показывает новый аккорд
     }
   }
 
   function selectQuality(label: string) {
-    setQuality(prev => (prev === label ? null : label));
-    setBass(null);
+    if (quality === label) {
+      setQuality(null);
+      setBass(null);
+      onClear();
+    } else {
+      setQuality(label);
+      setBass(null);
+    }
   }
 
   function selectBass(note: string) {
