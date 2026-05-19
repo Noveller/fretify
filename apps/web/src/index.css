@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light theme (default) */
+:root {
+  --color-surface: #ffffff;
+  --color-surface-2: #f4f4f5;
+  --color-on-surface: #18181b;
+  --color-on-surface-muted: #71717a;
+  --color-accent: #6366f1;
+  --color-accent-fg: #ffffff;
+  --color-string: #a1a1aa;
+  --color-fret: #d4d4d8;
+  --color-nut: #18181b;
+  --color-dot: #6366f1;
+  --color-dot-fg: #ffffff;
+  --color-dot-root: #e11d48;
+  --color-dot-root-fg: #ffffff;
+}
+
+/* Dark theme */
+.dark {
+  --color-surface: #09090b;
+  --color-surface-2: #18181b;
+  --color-on-surface: #fafafa;
+  --color-on-surface-muted: #a1a1aa;
+  --color-accent: #818cf8;
+  --color-accent-fg: #ffffff;
+  --color-string: #52525b;
+  --color-fret: #3f3f46;
+  --color-nut: #fafafa;
+  --color-dot: #818cf8;
+  --color-dot-fg: #09090b;
+  --color-dot-root: #fb7185;
+  --color-dot-root-fg: #09090b;
+}
+
+/* Vintage theme */
+.vintage {
+  --color-surface: #fdf6e3;
+  --color-surface-2: #f5ead2;
+  --color-on-surface: #3c2a14;
+  --color-on-surface-muted: #8c6a3f;
+  --color-accent: #c77d2e;
+  --color-accent-fg: #fdf6e3;
+  --color-string: #c4a265;
+  --color-fret: #d4b896;
+  --color-nut: #3c2a14;
+  --color-dot: #c77d2e;
+  --color-dot-fg: #fdf6e3;
+  --color-dot-root: #a83232;
+  --color-dot-root-fg: #fdf6e3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  transition: background-color 0.2s, color 0.2s;
+}
