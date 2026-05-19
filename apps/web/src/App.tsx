@@ -4,18 +4,22 @@ import { ChordBuilder } from './components/ChordBuilder';
 import { ChordDiagram } from './components/ChordDiagram';
 import { ScaleView } from './components/ScaleView';
 import { Metronome } from './components/Metronome';
+import { LessonsView } from './components/LessonsView';
+import { AboutView } from './components/AboutView';
 import { ThemeToggle } from './components/ThemeToggle';
 
-type Tab = 'chords' | 'scales' | 'metronome';
+type Tab = 'chords' | 'scales' | 'metronome' | 'lessons';
 
 const TAB_LABELS: Record<Tab, string> = {
   chords:    'Аккорды',
   scales:    'Гаммы',
   metronome: 'Метроном',
+  lessons:   'Уроки',
 };
 
 export function App() {
   const [tab, setTab] = useState<Tab>('chords');
+  const [showAbout, setShowAbout] = useState(false);
   const [chord, setChord] = useState<ParsedChord | null>(null);
   const [voicings, setVoicings] = useState<Voicing[]>([]);
   const [selectedVoicing, setSelectedVoicing] = useState(0);
@@ -46,33 +50,51 @@ export function App() {
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--color-surface)' }}>
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 border-b" style={{ borderColor: 'var(--color-fret)' }}>
-        <span className="text-xl font-bold tracking-tight" style={{ color: 'var(--color-on-surface)' }}>
+        <button
+          onClick={() => setShowAbout(false)}
+          className="text-xl font-bold tracking-tight transition-opacity hover:opacity-70"
+          style={{ color: 'var(--color-on-surface)' }}
+        >
           fretify
-        </span>
+        </button>
         <div className="flex items-center gap-4">
-          <nav className="flex gap-1 rounded-lg p-1" style={{ backgroundColor: 'var(--color-surface-2)' }}>
-            {(['chords', 'scales', 'metronome'] as Tab[]).map(t => (
-              <button
-                key={t}
-                onClick={() => setTab(t)}
-                className="px-4 py-1.5 rounded-md text-sm font-medium transition-all"
-                style={
-                  tab === t
-                    ? { backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }
-                    : { color: 'var(--color-on-surface-muted)' }
-                }
-              >
-                {TAB_LABELS[t]}
-              </button>
-            ))}
-          </nav>
+          {!showAbout && (
+            <nav className="flex gap-1 rounded-lg p-1" style={{ backgroundColor: 'var(--color-surface-2)' }}>
+              {(['chords', 'scales', 'metronome', 'lessons'] as Tab[]).map(t => (
+                <button
+                  key={t}
+                  onClick={() => setTab(t)}
+                  className="px-4 py-1.5 rounded-md text-sm font-medium transition-all"
+                  style={
+                    tab === t
+                      ? { backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }
+                      : { color: 'var(--color-on-surface-muted)' }
+                  }
+                >
+                  {TAB_LABELS[t]}
+                </button>
+              ))}
+            </nav>
+          )}
+          <button
+            onClick={() => setShowAbout(v => !v)}
+            className="text-sm transition-all hover:opacity-80"
+            style={{
+              color: showAbout ? 'var(--color-accent)' : 'var(--color-on-surface-muted)',
+              fontWeight: showAbout ? 600 : 400,
+            }}
+          >
+            О проекте
+          </button>
           <ThemeToggle />
         </div>
       </header>
 
       {/* Main */}
       <main className="flex-1 flex flex-col items-center px-4 pt-10 pb-12 gap-10">
-        {tab === 'chords' && (
+        {showAbout && <AboutView />}
+
+        {!showAbout && tab === 'chords' && (
           <>
             <div className="w-full max-w-2xl">
               <ChordBuilder onSubmit={handleChord} onClear={handleClear} />
@@ -98,9 +120,11 @@ export function App() {
           </>
         )}
 
-        {tab === 'scales' && <ScaleView />}
+        {!showAbout && tab === 'scales' && <ScaleView />}
 
-        {tab === 'metronome' && <Metronome />}
+        {!showAbout && tab === 'metronome' && <Metronome />}
+
+        {!showAbout && tab === 'lessons' && <LessonsView />}
       </main>
     </div>
   );
