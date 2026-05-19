@@ -21,10 +21,11 @@ export function findVoicings(chord: ParsedChord, tuning = STANDARD_TUNING): Voic
   const MAX_SPAN = 4;
 
   const optionsPerString: number[][] = tuning.map(open => {
-    const valid: number[] = [-1];
+    const valid: number[] = [];
     for (let f = 0; f <= MAX_FRET; f++) {
       if (searchNotes.has((open + f) % 12)) valid.push(f);
     }
+    valid.push(-1); // mute last — prefer playing over muting
     return valid;
   });
 
@@ -50,7 +51,7 @@ export function findVoicings(chord: ParsedChord, tuning = STANDARD_TUNING): Voic
         }
       }
 
-      if (results.length < 200) results.push([...current]);
+      if (results.length < 500) results.push([...current]);
       return;
     }
 
@@ -75,20 +76,37 @@ export function findVoicings(chord: ParsedChord, tuning = STANDARD_TUNING): Voic
 
   // Score and sort voicings
   const scored = results.map(frets => {
-    const active = frets.filter(f => f >= 0);
     const pressed = frets.filter(f => f > 0);
     const minFret = pressed.length > 0 ? Math.min(...pressed) : 0;
     const maxFret = pressed.length > 0 ? Math.max(...pressed) : 0;
     const span = maxFret - minFret;
     const muted = frets.filter(f => f < 0).length;
     const position = minFret; // prefer lower positions
-    const score = position * 10 + span * 3 + muted * 2;
+    // Penalize open strings in position chords (minFret≥3) to prefer closed barre shapes
+    const openStrings = frets.filter(f => f === 0).length;
+    const openPenalty = minFret >= 3 ? openStrings * 5 : 0;
+    const score = position * 2 + span * 4 + muted * 6 + openPenalty;
     return { frets, score, minFret };
   });
 
   scored.sort((a, b) => a.score - b.score);
 
-  return scored.slice(0, 6).map(({ frets, minFret }) => {
+  // Pick best voicing per position band to ensure diversity across the neck,
+  // then fill remaining slots with overall best scores.
+  const BANDS: [number, number][] = [[0, 2], [3, 6], [7, 12]];
+  const usedIdx = new Set<number>();
+  const selected: typeof scored = [];
+
+  for (const [lo, hi] of BANDS) {
+    const idx = scored.findIndex((v, i) => !usedIdx.has(i) && v.minFret >= lo && v.minFret <= hi);
+    if (idx >= 0) { selected.push(scored[idx]); usedIdx.add(idx); }
+  }
+  for (let i = 0; i < scored.length && selected.length < 8; i++) {
+    if (!usedIdx.has(i)) { selected.push(scored[i]); usedIdx.add(i); }
+  }
+  selected.sort((a, b) => a.score - b.score);
+
+  return selected.map(({ frets, minFret }) => {
     const startFret = minFret <= 1 ? 0 : minFret;
     return { frets, startFret, fingers: frets.map(() => null) };
   });

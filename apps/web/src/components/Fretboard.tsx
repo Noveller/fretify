@@ -1,4 +1,5 @@
 import { Voicing, STANDARD_TUNING, indexToNote } from '@fretify/core';
+import { playNote } from '../audio/karplusStrong';
 
 interface FretboardProps {
   voicing: Voicing;
@@ -21,16 +22,16 @@ export function Fretboard({ voicing, rootNote, chordNotes: _chordNotes, tuning =
   const width = PADDING_LEFT + (numStrings - 1) * STRING_SPACING + 36;
   const height = PADDING_TOP + FRETS_SHOWN * FRET_SPACING + 20;
 
-  // SVG coordinate: string i → x = PADDING_LEFT + i * STRING_SPACING
-  // fret f → y = PADDING_TOP + f * FRET_SPACING (f=0 is nut/top)
-
   function stringX(i: number) { return PADDING_LEFT + i * STRING_SPACING; }
   function fretY(f: number) { return PADDING_TOP + f * FRET_SPACING; }
 
-  // Note at each string position
   function noteAtString(si: number, f: number) {
     if (f < 0) return null;
     return (tuning[si] + f) % 12;
+  }
+
+  function handleNoteClick(si: number, fret: number) {
+    playNote(si, fret);
   }
 
   return (
@@ -101,24 +102,26 @@ export function Fretboard({ voicing, rootNote, chordNotes: _chordNotes, tuning =
       {/* Finger dots and markers */}
       {frets.map((fret, si) => {
         const x = stringX(si);
+
         if (fret < 0) {
-          // Muted X above nut
           return (
             <text key={si} x={x} y={PADDING_TOP - 14} textAnchor="middle" fontSize={14} fill="var(--color-on-surface-muted)">×</text>
           );
         }
+
         if (fret === 0) {
           const note = noteAtString(si, 0)!;
           const isRoot = note === rootNote;
           const color = isRoot ? 'var(--color-dot-root)' : 'var(--color-dot)';
           const noteName = indexToNote(note);
           return (
-            <g key={si}>
+            <g key={si} style={{ cursor: 'pointer' }} onClick={() => handleNoteClick(si, 0)}>
               <circle cx={x} cy={PADDING_TOP - 14} r={DOT_RADIUS} fill="none" stroke={color} strokeWidth={1.5} />
               <text x={x} y={PADDING_TOP - 10} textAnchor="middle" fontSize={10} fontWeight="600" fill={color}>{noteName}</text>
             </g>
           );
         }
+
         // Fretted dot
         const relFret = startFret === 0 ? fret : fret - startFret + 1;
         const y = fretY(relFret - 0.5);
@@ -128,7 +131,7 @@ export function Fretboard({ voicing, rootNote, chordNotes: _chordNotes, tuning =
         const dotFg = isRoot ? 'var(--color-dot-root-fg)' : 'var(--color-dot-fg)';
         const noteName = indexToNote(note);
         return (
-          <g key={si}>
+          <g key={si} style={{ cursor: 'pointer' }} onClick={() => handleNoteClick(si, fret)}>
             <circle cx={x} cy={y} r={DOT_RADIUS} fill={dotColor} />
             <text x={x} y={y + 4} textAnchor="middle" fontSize={10} fontWeight="600" fill={dotFg}>{noteName}</text>
           </g>
