@@ -65,6 +65,7 @@ export function Metronome() {
       pulseTimer.current = setTimeout(() => setActive(null), 120);
     });
     return () => {
+      metronomeStop();
       metronomeSetCallback(null);
       if (pulseTimer.current) clearTimeout(pulseTimer.current);
     };

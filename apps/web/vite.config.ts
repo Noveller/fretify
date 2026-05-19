@@ -9,4 +9,8 @@ export default defineConfig({
       '@fretify/core': path.resolve(__dirname, '../../packages/core/src/index.ts'),
     },
   },
+  preview: {
+    // SPA fallback for direct URL access in preview mode
+    open: true,
+  },
 });
