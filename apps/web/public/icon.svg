@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#18181b"/>
+  <!-- Nut -->
+  <rect x="148" y="126" width="216" height="16" rx="4" fill="#e4e4e7"/>
+  <!-- Fret lines -->
+  <rect x="148" y="216" width="216" height="6" rx="2" fill="#3f3f46"/>
+  <rect x="148" y="308" width="216" height="6" rx="2" fill="#3f3f46"/>
+  <rect x="148" y="400" width="216" height="6" rx="2" fill="#3f3f46"/>
+  <!-- String lines -->
+  <rect x="183" y="126" width="5" height="280" fill="#52525b"/>
+  <rect x="254" y="126" width="5" height="280" fill="#52525b"/>
+  <rect x="325" y="126" width="5" height="280" fill="#52525b"/>
+  <!-- Chord dots -->
+  <circle cx="185" cy="261" r="26" fill="#6366f1"/>
+  <circle cx="327" cy="353" r="26" fill="#6366f1"/>
+</svg>
