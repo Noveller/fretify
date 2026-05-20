@@ -125,11 +125,11 @@ export function Metronome() {
     <div className="flex flex-col gap-6 w-full max-w-md mx-auto">
 
       {/* BPM display + slider */}
-      <div className="rounded-xl p-6 flex flex-col items-center gap-4"
+      <div className="rounded-xl p-4 sm:p-6 flex flex-col items-center gap-4"
         style={{ backgroundColor: 'var(--color-surface-2)' }}>
         <div className="flex items-end gap-2">
-          <span className="font-mono font-bold leading-none"
-            style={{ fontSize: 72, color: 'var(--color-on-surface)' }}>{bpm}</span>
+          <span className="font-mono font-bold leading-none text-5xl sm:text-7xl"
+            style={{ color: 'var(--color-on-surface)' }}>{bpm}</span>
           <span className="text-sm mb-3" style={{ color: 'var(--color-on-surface-muted)' }}>BPM</span>
         </div>
 

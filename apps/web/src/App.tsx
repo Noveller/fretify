@@ -98,20 +98,23 @@ export function App() {
     { to: '/lessons',   label: t('nav.lessons')   },
   ];
 
+  const ALL_TABS = [...TABS, { to: '/about', label: t('nav.about') }];
+
   return (
     <>
     <PageHelmet />
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--color-surface)' }}>
       {/* Header */}
-      <header className="flex items-center justify-between px-6 py-4 border-b"
+      <header className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4 border-b"
         style={{ borderColor: 'var(--color-fret)' }}>
         <NavLink to="/" className="text-xl font-bold tracking-tight transition-opacity hover:opacity-70"
           style={{ color: 'var(--color-on-surface)' }}>
           fretify
         </NavLink>
 
-        <div className="flex items-center gap-4">
-          <nav className="flex gap-1 rounded-lg p-1" style={{ backgroundColor: 'var(--color-surface-2)' }}>
+        <div className="flex items-center gap-2 sm:gap-4">
+          {/* Desktop nav */}
+          <nav className="hidden sm:flex gap-1 rounded-lg p-1" style={{ backgroundColor: 'var(--color-surface-2)' }}>
             {TABS.map(({ to, label }) => (
               <NavLink
                 key={to}
@@ -130,7 +133,7 @@ export function App() {
 
           <NavLink
             to="/about"
-            className="text-sm transition-all hover:opacity-80"
+            className="hidden sm:block text-sm transition-all hover:opacity-80"
             style={({ isActive }) => ({
               color: isActive ? 'var(--color-accent)' : 'var(--color-on-surface-muted)',
               fontWeight: isActive ? 600 : 400,
@@ -162,7 +165,7 @@ export function App() {
       </header>
 
       {/* Main */}
-      <main className="flex-1 flex flex-col items-center px-4 pt-10 pb-12 gap-10">
+      <main className="flex-1 flex flex-col items-center px-3 sm:px-4 pt-6 sm:pt-10 pb-24 sm:pb-12 gap-6 sm:gap-10">
         <Routes>
           <Route path="/"          element={<Navigate to="/chords" replace />} />
           <Route path="/chords"    element={<ChordsPage />} />
@@ -173,6 +176,23 @@ export function App() {
           <Route path="/about"     element={<AboutView />} />
         </Routes>
       </main>
+
+      {/* Mobile bottom nav */}
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 flex border-t z-50"
+        style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-fret)' }}>
+        {ALL_TABS.map(({ to, label }) => (
+          <NavLink
+            key={to}
+            to={to}
+            className="flex-1 py-2 text-center text-xs font-medium transition-colors leading-tight"
+            style={({ isActive }) => ({
+              color: isActive ? 'var(--color-accent)' : 'var(--color-on-surface-muted)',
+            })}
+          >
+            {label}
+          </NavLink>
+        ))}
+      </nav>
     </div>
     </>
   );

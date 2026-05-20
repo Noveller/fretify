@@ -36,7 +36,7 @@ export function ChordDiagram({ chord, voicings, selectedIdx, onSelectVoicing }: 
     <div className="flex flex-col items-center gap-6">
       {/* Chord info */}
       <div className="text-center">
-        <h2 className="text-3xl font-bold tracking-tight" style={{ color: 'var(--color-on-surface)' }}>
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: 'var(--color-on-surface)' }}>
           {chord.displayName}
         </h2>
         <p className="mt-1 text-sm" style={{ color: 'var(--color-on-surface-muted)' }}>
@@ -48,7 +48,7 @@ export function ChordDiagram({ chord, voicings, selectedIdx, onSelectVoicing }: 
       {/* SVG Fretboard */}
       {voicings.length > 0 && (
         <div
-          className="rounded-xl p-6 flex flex-col items-center gap-4"
+          className="rounded-xl p-3 sm:p-6 flex flex-col items-center gap-4"
           style={{ backgroundColor: 'var(--color-surface-2)' }}
         >
           <Fretboard

@@ -160,26 +160,29 @@ export function DrumMachine() {
     <div className="w-full max-w-3xl mx-auto flex flex-col gap-5">
 
       {/* Transport card */}
-      <div className="rounded-2xl px-6 py-5 flex items-center gap-5"
+      <div className="rounded-2xl px-4 sm:px-6 py-4 sm:py-5 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5"
         style={{ backgroundColor: 'var(--color-surface-2)', border: '1px solid var(--color-fret)' }}>
 
-        {/* BPM badge */}
-        <div className="flex flex-col items-center shrink-0 rounded-xl px-4 py-2"
-          style={{ backgroundColor: 'var(--color-surface)', minWidth: 72 }}>
-          <span className="font-mono font-black leading-none"
-            style={{ fontSize: 40, color: 'var(--color-on-surface)' }}>{bpm}</span>
-          <span className="text-xs font-semibold uppercase tracking-widest"
-            style={{ color: 'var(--color-on-surface-muted)' }}>BPM</span>
-        </div>
+        {/* BPM + slider row on mobile */}
+        <div className="flex items-center gap-3 sm:contents">
+          {/* BPM badge */}
+          <div className="flex flex-col items-center shrink-0 rounded-xl px-3 sm:px-4 py-2"
+            style={{ backgroundColor: 'var(--color-surface)', minWidth: 60 }}>
+            <span className="font-mono font-black leading-none text-3xl sm:text-4xl"
+              style={{ color: 'var(--color-on-surface)' }}>{bpm}</span>
+            <span className="text-xs font-semibold uppercase tracking-widest"
+              style={{ color: 'var(--color-on-surface-muted)' }}>BPM</span>
+          </div>
 
-        {/* Slider */}
-        <input type="range" min={BPM_MIN} max={BPM_MAX} value={bpm}
-          onChange={e => setBpm(Number(e.target.value))}
-          className="flex-1" style={{ accentColor: 'var(--color-accent)' }} />
+          {/* Slider */}
+          <input type="range" min={BPM_MIN} max={BPM_MAX} value={bpm}
+            onChange={e => setBpm(Number(e.target.value))}
+            className="flex-1" style={{ accentColor: 'var(--color-accent)' }} />
+        </div>
 
         {/* Play/Stop */}
         <button onClick={toggleRunning}
-          className="flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm transition-all hover:opacity-90 active:scale-95 shrink-0"
+          className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl font-bold text-sm transition-all hover:opacity-90 active:scale-95 shrink-0"
           style={running
             ? { backgroundColor: '#ef4444', color: '#fff', boxShadow: '0 0 16px #ef444466' }
             : { backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)',
@@ -204,7 +207,7 @@ export function DrumMachine() {
       </div>
 
       {/* Grid card */}
-      <div className="rounded-2xl p-5"
+      <div className="rounded-2xl p-3 sm:p-5"
         style={{ backgroundColor: 'var(--color-surface-2)', border: '1px solid var(--color-fret)', overflowX: 'auto' }}>
         <div style={{ minWidth: gridMinW }}>
 

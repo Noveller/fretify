@@ -121,16 +121,16 @@ export function ScaleView() {
 
       {/* Fretboard + controls */}
       {ready && (
-        <div className="rounded-xl p-4 flex flex-col gap-4"
+        <div className="rounded-xl p-3 sm:p-4 flex flex-col gap-4"
           style={{ backgroundColor: 'var(--color-surface-2)' }}>
 
           {/* Header row */}
-          <div className="flex items-center justify-between flex-wrap gap-3">
+          <div className="flex items-start sm:items-center justify-between flex-wrap gap-2 sm:gap-3">
             <div>
-              <span className="text-lg font-bold" style={{ color: 'var(--color-on-surface)' }}>
+              <span className="text-base sm:text-lg font-bold" style={{ color: 'var(--color-on-surface)' }}>
                 {rootName} {tScale(formula!.name)}
               </span>
-              <span className="ml-3 text-sm" style={{ color: 'var(--color-on-surface-muted)' }}>
+              <span className="ml-2 sm:ml-3 text-sm" style={{ color: 'var(--color-on-surface-muted)' }}>
                 {noteNames.join(' · ')}
               </span>
             </div>
