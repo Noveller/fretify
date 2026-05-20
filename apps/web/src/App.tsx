@@ -11,6 +11,7 @@ import { LessonsView } from './components/LessonsView';
 import { DrumMachine } from './components/DrumMachine';
 import { AboutView } from './components/AboutView';
 import { ThemeToggle } from './components/ThemeToggle';
+import { SafariBanner } from './components/SafariBanner';
 import { setLanguage, LANGUAGES } from './i18n';
 
 const BASE_URL = 'https://fretify.app';
@@ -104,6 +105,8 @@ export function App() {
     <>
     <PageHelmet />
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--color-surface)' }}>
+      <SafariBanner />
+
       {/* Header */}
       <header className="flex items-center justify-between px-3 sm:px-6 py-3 sm:py-4 border-b"
         style={{ borderColor: 'var(--color-fret)' }}>
