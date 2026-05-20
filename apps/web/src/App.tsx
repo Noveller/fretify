@@ -14,7 +14,7 @@ import { ThemeToggle } from './components/ThemeToggle';
 import { SafariBanner } from './components/SafariBanner';
 import { setLanguage, LANGUAGES } from './i18n';
 
-const BASE_URL = 'https://fretify.app';
+const BASE_URL = 'https://fretify.online';
 
 function PageHelmet() {
   const { pathname } = useLocation();
