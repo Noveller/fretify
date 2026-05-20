@@ -45,9 +45,9 @@ function playWood(ctx: AudioContext, t: number, accent: boolean) {
   const src = ctx.createBufferSource();
   src.buffer = buf;
   const bp  = ctx.createBiquadFilter();
-  bp.type = 'bandpass'; bp.frequency.value = accent ? 1300 : 850; bp.Q.value = 14;
+  bp.type = 'bandpass'; bp.frequency.value = accent ? 1300 : 850; bp.Q.value = 6;
   const env = ctx.createGain();
-  env.gain.setValueAtTime(accent ? 1.0 : 0.65, t);
+  env.gain.setValueAtTime(accent ? 3.0 : 2.0, t);
   env.gain.exponentialRampToValueAtTime(0.001, t + dur);
   src.connect(bp); bp.connect(env); env.connect(ctx.destination);
   src.start(t); src.stop(t + dur + 0.01);

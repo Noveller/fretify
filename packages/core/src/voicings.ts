@@ -1,5 +1,6 @@
 import { ParsedChord } from './parser';
 import { indexToNote } from './notes';
+import { CURATED_VOICINGS } from './curatedVoicings';
 
 export interface Voicing {
   frets: number[];      // per string, -1 = muted, 0 = open
@@ -11,6 +12,13 @@ export interface Voicing {
 export const STANDARD_TUNING = [4, 9, 2, 7, 11, 4]; // E A D G B E
 
 export function findVoicings(chord: ParsedChord, tuning = STANDARD_TUNING): Voicing[] {
+  // Prepend curated voicings for non-slash chords (standard fingerings, may omit 5th)
+  const curatedKey = chord.bassNote === chord.rootNote
+    ? `${chord.rootNote}_${chord.qualityName}`
+    : null;
+  const curatedFrets: number[][] = curatedKey ? (CURATED_VOICINGS[curatedKey] ?? []) : [];
+  const curatedSet = new Set(curatedFrets.map(f => f.join(',')));
+
   const { notes, bassNote } = chord;
   const noteSet = new Set(notes);
   // Bass note may be outside chord tones (e.g. Am/G) — include it as valid on any string,
@@ -106,10 +114,21 @@ export function findVoicings(chord: ParsedChord, tuning = STANDARD_TUNING): Voic
   }
   selected.sort((a, b) => a.score - b.score);
 
-  return selected.map(({ frets, minFret }) => {
+  const algorithmicVoicings = selected
+    .filter(v => !curatedSet.has(v.frets.join(',')))
+    .map(({ frets, minFret }) => {
+      const startFret = minFret <= 1 ? 0 : minFret;
+      return { frets, startFret, fingers: frets.map(() => null) };
+    });
+
+  const curatedVoicings: Voicing[] = curatedFrets.map(frets => {
+    const pressed = frets.filter(f => f > 0);
+    const minFret = pressed.length > 0 ? Math.min(...pressed) : 0;
     const startFret = minFret <= 1 ? 0 : minFret;
     return { frets, startFret, fingers: frets.map(() => null) };
   });
+
+  return [...curatedVoicings, ...algorithmicVoicings].slice(0, 8);
 }
 
 export function noteNameOnString(stringIdx: number, fret: number, tuning = STANDARD_TUNING): string {

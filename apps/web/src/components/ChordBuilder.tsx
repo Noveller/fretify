@@ -3,25 +3,41 @@ import { useTranslation } from 'react-i18next';
 
 const ROOT_NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
-const QUALITIES: Array<{ label: string; suffix: string }> = [
-  { label: 'maj',   suffix: '' },
-  { label: 'm',     suffix: 'm' },
-  { label: '7',     suffix: '7' },
-  { label: 'maj7',  suffix: 'maj7' },
-  { label: 'm7',    suffix: 'm7' },
-  { label: '6',     suffix: '6' },
-  { label: '9',     suffix: '9' },
-  { label: 'm9',    suffix: 'm9' },
-  { label: 'maj9',  suffix: 'maj9' },
-  { label: 'sus2',  suffix: 'sus2' },
-  { label: 'sus4',  suffix: 'sus4' },
-  { label: '7sus4', suffix: '7sus4' },
-  { label: 'dim',   suffix: 'dim' },
-  { label: 'dim7',  suffix: 'dim7' },
-  { label: 'aug',   suffix: 'aug' },
-  { label: 'm7b5',  suffix: 'm7b5' },
-  { label: 'add9',  suffix: 'add9' },
-  { label: '5',     suffix: '5' },
+const QUALITIES: Array<{ label: string; suffix: string; group: string }> = [
+  // Basic
+  { label: 'maj',   suffix: '',      group: 'basic' },
+  { label: 'm',     suffix: 'm',     group: 'basic' },
+  { label: '5',     suffix: '5',     group: 'basic' },
+  // Seventh
+  { label: '7',     suffix: '7',     group: '7th' },
+  { label: 'maj7',  suffix: 'maj7',  group: '7th' },
+  { label: 'm7',    suffix: 'm7',    group: '7th' },
+  { label: 'dim7',  suffix: 'dim7',  group: '7th' },
+  // Ninth
+  { label: '9',     suffix: '9',     group: '9th' },
+  { label: 'maj9',  suffix: 'maj9',  group: '9th' },
+  { label: 'm9',    suffix: 'm9',    group: '9th' },
+  { label: 'add9',  suffix: 'add9',  group: '9th' },
+  // Sixth
+  { label: '6',     suffix: '6',     group: '6th' },
+  { label: 'm6',    suffix: 'm6',    group: '6th' },
+  // Sus
+  { label: 'sus2',  suffix: 'sus2',  group: 'sus' },
+  { label: 'sus4',  suffix: 'sus4',  group: 'sus' },
+  { label: '7sus4', suffix: '7sus4', group: 'sus' },
+  // Other
+  { label: 'dim',   suffix: 'dim',   group: 'other' },
+  { label: 'aug',   suffix: 'aug',   group: 'other' },
+  { label: 'm7b5',  suffix: 'm7b5',  group: 'other' },
+];
+
+const QUALITY_GROUPS: { key: string; label: string }[] = [
+  { key: 'basic', label: '' },
+  { key: '7th',   label: '7' },
+  { key: '9th',   label: '9' },
+  { key: '6th',   label: '6' },
+  { key: 'sus',   label: 'sus' },
+  { key: 'other', label: '…' },
 ];
 
 interface ChordBuilderProps {
@@ -124,16 +140,29 @@ export function ChordBuilder({ onSubmit, onClear }: ChordBuilderProps) {
         <span className="text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--color-on-surface-muted)' }}>
           {t('chords.sectionQuality')}
         </span>
-        <div className="flex flex-wrap gap-2">
-          {QUALITIES.map(q => (
-            <Chip
-              key={q.label}
-              label={q.label}
-              selected={quality === q.label}
-              dim={root === null}
-              onClick={() => root !== null && selectQuality(q.label)}
-            />
-          ))}
+        <div className="flex flex-col gap-1.5">
+          {QUALITY_GROUPS.map(group => {
+            const items = QUALITIES.filter(q => q.group === group.key);
+            return (
+              <div key={group.key} className="flex flex-wrap gap-2 items-center">
+                {group.label && (
+                  <span className="text-xs w-7 shrink-0 font-medium"
+                    style={{ color: 'var(--color-on-surface-muted)' }}>
+                    {group.label}
+                  </span>
+                )}
+                {items.map(q => (
+                  <Chip
+                    key={q.label}
+                    label={q.label}
+                    selected={quality === q.label}
+                    dim={root === null}
+                    onClick={() => root !== null && selectQuality(q.label)}
+                  />
+                ))}
+              </div>
+            );
+          })}
         </div>
       </div>
 
