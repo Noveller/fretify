@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { playChord } from '../../audio/karplusStrong';
 import { CHORD_FRETS } from '../../lessons/lessonData';
 
@@ -30,6 +31,7 @@ function ReplayIcon() {
 }
 
 export function ChordHearExercise({ chord, distractors, disabled, correctAnswer, onAnswer }: Props) {
+  const { t } = useTranslation();
   const [selected, setSelected] = useState<string | null>(null);
   const [options, setOptions] = useState<string[]>([]);
 
@@ -76,7 +78,7 @@ export function ChordHearExercise({ chord, distractors, disabled, correctAnswer,
   return (
     <div className="flex flex-col items-center gap-8 w-full">
       <p className="text-base font-medium text-center" style={{ color: 'var(--color-on-surface-muted)' }}>
-        Какой аккорд ты слышишь?
+        {t('lessons.chordHearPrompt')}
       </p>
 
       {/* Play button */}
@@ -94,7 +96,7 @@ export function ChordHearExercise({ chord, distractors, disabled, correctAnswer,
           <ReplayIcon />
         </div>
         <span className="text-xs font-medium" style={{ color: 'var(--color-on-surface-muted)' }}>
-          Нажми чтобы прослушать
+          {t('lessons.clickToListen')}
         </span>
       </button>
 

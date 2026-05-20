@@ -1,0 +1,160 @@
+{
+  "nav": {
+    "chords": "Acorduri",
+    "scales": "Game",
+    "metronome": "Metronom",
+    "drums": "Tobe",
+    "lessons": "Lecții",
+    "about": "Despre"
+  },
+  "common": {
+    "start": "Start",
+    "stop": "Stop",
+    "play": "Redare",
+    "playing": "Redare...",
+    "all": "Toate",
+    "comingSoon": "În curând",
+    "share": "Distribuie",
+    "support": "Susține",
+    "exit": "Ieși",
+    "retry": "Repetă",
+    "continue": "Continuare"
+  },
+  "chords": {
+    "sectionNote": "Notă",
+    "sectionQuality": "Tip",
+    "sectionBass": "Bas",
+    "selectHint": "Selectează o notă și un tip de acord"
+  },
+  "scales": {
+    "sectionNote": "Notă",
+    "sectionPosition": "Poziție",
+    "categoryScale": "Game",
+    "categoryMode": "Moduri",
+    "categoryPentatonic": "Pentatonice",
+    "selectHint": "Selectează o notă și o gamă",
+    "names": {
+      "Мажор": "Major",
+      "Минор": "Minor",
+      "Гарм. минор": "Min. armonic",
+      "Мел. минор": "Min. melodic",
+      "Дориан": "Dorian",
+      "Фригийский": "Frigian",
+      "Лидийский": "Lidian",
+      "Миксолидийский": "Mixolidian",
+      "Локрийский": "Locrian",
+      "Фриг. доминанта": "Dom. frigian",
+      "Мажорная": "Major pent.",
+      "Минорная": "Minor pent.",
+      "Блюз": "Blues"
+    }
+  },
+  "metronome": {
+    "sound": "Sunet",
+    "soundClick": "Clic",
+    "soundWood": "Lemn",
+    "soundBell": "Clopot",
+    "timeSig": "Timp",
+    "pattern": "Model ritmic",
+    "patternHint": "Apasă pe timp pentru a schimba: accent → bătaie → pauză",
+    "tap": "Tap",
+    "beatAccent": "ACCENT",
+    "beatNormal": "BĂTAIE",
+    "beatSilent": "PAUZĂ"
+  },
+  "drums": {
+    "patternLabel": "Model",
+    "presets": {
+      "Пусто": "Gol",
+      "Базовый": "De bază",
+      "Рок": "Rock",
+      "Фанк": "Funk",
+      "Хип-хоп": "Hip-Hop",
+      "Трэп": "Trap",
+      "Регги": "Reggae",
+      "Диско": "Disco",
+      "Джаз": "Jazz",
+      "Самба": "Samba"
+    }
+  },
+  "lessons": {
+    "progressTitle": "Progres",
+    "correct": "Corect!",
+    "wrong": "Greșit",
+    "correctAnswer": "Răspuns corect",
+    "lessonComplete": "Lecție finalizată!",
+    "xpEarned": "+{{xp}} XP câștigat",
+    "noLives": "Vieți epuizate",
+    "tryAgain": "Încearcă din nou",
+    "chordHearPrompt": "Ce acord auzi?",
+    "scaleHearPrompt": "Ce gamă sună de la nota {{note}}?",
+    "clickToListen": "Apasă pentru a asculta",
+    "playingDots": "Redare...",
+    "modules": {
+      "chords": {
+        "title": "Acorduri",
+        "subtitle": "Învață să auzi și să recunoști acordurile",
+        "chords-minor": { "title": "Acorduri minore", "subtitle": "Am · Em · Dm · Bm" },
+        "chords-major": { "title": "Acorduri majore", "subtitle": "C · G · D · A · E" },
+        "chords-mixed": { "title": "Major și minor", "subtitle": "Am · Em · C · G · D" }
+      },
+      "scales": {
+        "title": "Game",
+        "subtitle": "Învață caracterul gamelor și modurilor",
+        "scales-major-minor": { "title": "Major și minor", "subtitle": "Cea mai importantă diferență" },
+        "scales-pentatonic":  { "title": "Pentatonice", "subtitle": "Majoră · Minoră · Blues" },
+        "scales-modes":       { "title": "Moduri", "subtitle": "Dorian · Frigian · Mixolidian" }
+      },
+      "rhythm": {
+        "title": "Ritm",
+        "subtitle": "În curând"
+      }
+    }
+  },
+  "about": {
+    "heroTitle": "Salut",
+    "heroText": "Mă numesc <1>Alex</1> — creatorul Fretify. Sunt un dezvoltator frontend și chitarist. Cânt la chitară de câțiva ani și, ca mulți alții, m-am confruntat cu aceeași problemă:",
+    "heroQuote": "puteam cânta melodii, dar grifele chitarei rămâneau pentru mine o „hartă de neînțeles”.",
+    "whyTitle": "De ce există Fretify",
+    "whyIntro": "Învățarea grifului este una dintre cele mai dificile sarcini pentru chitariști. Înveți:",
+    "whyItems": ["forme de acorduri", "tablaturi", "tipare de game"],
+    "whyResult": "Dar în final, grieful rămâne ceva ce trebuie „amintit”, nu înțeles.",
+    "whyFretify": "Am creat Fretify pentru că îmi lipsea un instrument simplu care să ajute la:",
+    "whyFretifyItems": [
+      "înțelegerea vizuală a grifului",
+      "conectarea teoriei cu pozițiile reale",
+      "exersarea gamelor și notelor într-un mod clar",
+      "dezvoltarea memoriei musculare și vizuale"
+    ],
+    "ideaTitle": "Ideea proiectului",
+    "ideaIntro": "Fretify nu este doar o vizualizare de note. Este un instrument de învățare care ajută să:",
+    "ideaItems": [
+      "vezi notele instantaneu",
+      "studiezi gamele și acordurile vizual",
+      "memorezi tiparele grifului",
+      "încetezi treptat să gândești în tablaturi și să începi să gândești în muzică"
+    ],
+    "goalTitle": "Scopul meu",
+    "goalIntro": "Scopul meu este simplu:",
+    "goalHighlight": "să ajut chitariștii să înțeleagă cu adevărat grieful, nu doar să-l memoreze.",
+    "goalDetail": "Vreau ca Fretify să devină un instrument de practică zilnică — ceva ce deschizi 5–10 minute pe zi și devii treptat mai sigur în muzică.",
+    "whyContinueTitle": "De ce continuu să dezvolt proiectul",
+    "whyContinueIntro": "Acest proiect este personal. El unește două domenii ale mele:",
+    "sphere1": "dezvoltare",
+    "sphere2": "muzică",
+    "whyContinueResult": "Continuu să-l dezvolt pentru că cred: învățarea chitarei trebuie să fie vizuală, simplă și plăcută — nu complicată și frustrantă.",
+    "supportTitle": "Suport",
+    "supportText": "Dacă Fretify ți-a fost util, poți susține proiectul distribuindu-l sau donând. Orice suport mă ajută să continuu dezvoltarea și să adaug noi moduri de învățare.",
+    "footer": "făcut cu ❤️ — Alex (chakopss)"
+  },
+  "seo": {
+    "defaultTitle": "Fretify — Învață grieful chitarei",
+    "defaultDesc": "Acorduri, game, metronom, tobă și lecții pentru chitariști. Gratuit în browser.",
+    "/chords":    { "title": "Acorduri chitară — Fretify",    "desc": "Găsește acorduri și poziții pe grieful chitarei. Diagrame cu baré și poziții deschise." },
+    "/scales":    { "title": "Game și moduri chitară — Fretify","desc": "Explorează major, minor, pentatonice și moduri pe grieful chitarei cu redare." },
+    "/metronome": { "title": "Metronom online — Fretify",      "desc": "Metronom online gratuit pentru chitariști. Reglează tempo, modele ritmice și sunete." },
+    "/drums":     { "title": "Tobă online — Fretify",          "desc": "Creează modele ritmice în browser. 10 stiluri: rock, funk, hip-hop, trap, reggae, jazz." },
+    "/lessons":   { "title": "Lecții chitară online — Fretify","desc": "Lecții interactive stil Duolingo pentru chitariști. Învață să auzi acorduri și game." },
+    "/about":     { "title": "Despre — Fretify",               "desc": "Fretify — instrument de învățare a grifului chitarei, creat de un chitarist-dezvoltator." }
+  }
+}

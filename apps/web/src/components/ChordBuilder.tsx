@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ROOT_NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 
@@ -57,6 +58,7 @@ function Chip({
 }
 
 export function ChordBuilder({ onSubmit, onClear }: ChordBuilderProps) {
+  const { t } = useTranslation();
   const [root, setRoot] = useState<string | null>(null);
   const [quality, setQuality] = useState<string | null>(null);
   const [bass, setBass] = useState<string | null>(null);
@@ -103,7 +105,7 @@ export function ChordBuilder({ onSubmit, onClear }: ChordBuilderProps) {
       {/* Root note */}
       <div className="flex flex-col gap-2">
         <span className="text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--color-on-surface-muted)' }}>
-          Нота
+          {t('chords.sectionNote')}
         </span>
         <div className="flex flex-wrap gap-2">
           {ROOT_NOTES.map(note => (
@@ -120,7 +122,7 @@ export function ChordBuilder({ onSubmit, onClear }: ChordBuilderProps) {
       {/* Chord quality */}
       <div className="flex flex-col gap-2">
         <span className="text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--color-on-surface-muted)' }}>
-          Тип
+          {t('chords.sectionQuality')}
         </span>
         <div className="flex flex-wrap gap-2">
           {QUALITIES.map(q => (
@@ -139,7 +141,7 @@ export function ChordBuilder({ onSubmit, onClear }: ChordBuilderProps) {
       {showBass && (
         <div className="flex flex-col gap-2">
           <span className="text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--color-on-surface-muted)' }}>
-            Бас (опционально)
+            {t('chords.sectionBass')}
           </span>
           <div className="flex flex-wrap gap-2">
             <Chip

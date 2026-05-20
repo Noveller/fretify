@@ -1,11 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { indexToNote, SCALES } from '@fretify/core';
 import { playScale } from '../../audio/scalePlayer';
-
-function label(name: string): string {
-  const found = SCALES.find(s => s.name === name);
-  return found?.category === 'pentatonic' ? `${name} (пент.)` : name;
-}
 
 interface Props {
   rootNote: number;
@@ -45,6 +41,10 @@ function PlayIcon({ spinning }: { spinning: boolean }) {
 }
 
 export function ScaleHearExercise({ rootNote, scale, distractors, disabled, onAnswer }: Props) {
+  const { t } = useTranslation();
+  const scaleNames = t('scales.names', { returnObjects: true }) as Record<string, string>;
+  const tScale = (name: string) => scaleNames[name] ?? name;
+
   const [selected, setSelected] = useState<string | null>(null);
   const [options, setOptions] = useState<string[]>([]);
   const [playing, setPlaying] = useState(false);
@@ -95,7 +95,7 @@ export function ScaleHearExercise({ rootNote, scale, distractors, disabled, onAn
   return (
     <div className="flex flex-col items-center gap-8 w-full">
       <p className="text-base font-medium text-center" style={{ color: 'var(--color-on-surface-muted)' }}>
-        Какая гамма звучит от ноты <strong style={{ color: 'var(--color-on-surface)' }}>{rootName}</strong>?
+        {t('lessons.scaleHearPrompt', { note: rootName })}
       </p>
 
       {/* Play button */}
@@ -117,7 +117,7 @@ export function ScaleHearExercise({ rootNote, scale, distractors, disabled, onAn
           <PlayIcon spinning={playing} />
         </div>
         <span className="text-xs font-medium" style={{ color: 'var(--color-on-surface-muted)' }}>
-          {playing ? 'Играет...' : 'Нажми чтобы прослушать'}
+          {playing ? t('lessons.playingDots') : t('lessons.clickToListen')}
         </span>
       </button>
 
@@ -131,7 +131,7 @@ export function ScaleHearExercise({ rootNote, scale, distractors, disabled, onAn
             className="py-4 rounded-xl text-sm font-bold transition-all hover:opacity-90 active:scale-95 leading-tight px-2"
             style={optionStyle(opt)}
           >
-            {label(opt)}
+            {tScale(opt)}
           </button>
         ))}
       </div>

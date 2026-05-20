@@ -1,15 +1,10 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SCALES, type ScaleFormula, indexToNote, noteToIndex, STANDARD_TUNING } from '@fretify/core';
 import { ScaleFretboard } from './ScaleFretboard';
 import { playScale } from '../audio/scalePlayer';
 
 const ROOT_NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-
-const CATEGORY_LABELS: Record<ScaleFormula['category'], string> = {
-  scale: 'Гаммы',
-  mode: 'Лады',
-  pentatonic: 'Пентатоники',
-};
 const CATEGORIES: ScaleFormula['category'][] = ['scale', 'mode', 'pentatonic'];
 
 // 5 unique frets where the root note appears across all strings — natural position anchors
@@ -54,6 +49,16 @@ function PlayIcon() {
 }
 
 export function ScaleView() {
+  const { t } = useTranslation();
+  const scaleNames = t('scales.names', { returnObjects: true }) as Record<string, string>;
+  const tScale = (name: string) => scaleNames[name] ?? name;
+
+  const CATEGORY_LABELS: Record<ScaleFormula['category'], string> = {
+    scale:      t('scales.categoryScale'),
+    mode:       t('scales.categoryMode'),
+    pentatonic: t('scales.categoryPentatonic'),
+  };
+
   const [rootName, setRootName]       = useState<string | null>(null);
   const [scaleName, setScaleName]     = useState<string | null>(null);
   const [posIdx, setPosIdx]           = useState<number | null>(null); // null = all positions
@@ -98,7 +103,7 @@ export function ScaleView() {
   return (
     <div className="flex flex-col gap-6 w-full max-w-3xl mx-auto">
       {/* Root note */}
-      <Section title="Нота">
+      <Section title={t('scales.sectionNote')}>
         {ROOT_NOTES.map(note => (
           <Chip key={note} label={note} selected={rootName === note} onClick={() => toggleRoot(note)} />
         ))}
@@ -108,7 +113,7 @@ export function ScaleView() {
       {CATEGORIES.map(cat => (
         <Section key={cat} title={CATEGORY_LABELS[cat]}>
           {SCALES.filter(s => s.category === cat).map(s => (
-            <Chip key={s.name} label={s.name} selected={scaleName === s.name}
+            <Chip key={s.name} label={tScale(s.name)} selected={scaleName === s.name}
               dim={rootName === null} onClick={() => rootName !== null && toggleScale(s.name)} />
           ))}
         </Section>
@@ -123,7 +128,7 @@ export function ScaleView() {
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div>
               <span className="text-lg font-bold" style={{ color: 'var(--color-on-surface)' }}>
-                {rootName} {formula!.name}
+                {rootName} {tScale(formula!.name)}
               </span>
               <span className="ml-3 text-sm" style={{ color: 'var(--color-on-surface-muted)' }}>
                 {noteNames.join(' · ')}
@@ -142,15 +147,15 @@ export function ScaleView() {
               }}
             >
               <PlayIcon />
-              {playing ? 'Играет...' : 'Сыграть'}
+              {playing ? t('common.playing') : t('common.play')}
             </button>
           </div>
 
           {/* Position selector */}
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-xs font-medium uppercase tracking-widest mr-1"
-              style={{ color: 'var(--color-on-surface-muted)' }}>Позиция</span>
-            <Chip label="Все" selected={posIdx === null} onClick={() => setPosIdx(null)} />
+              style={{ color: 'var(--color-on-surface-muted)' }}>{t('scales.sectionPosition')}</span>
+            <Chip label={t('common.all')} selected={posIdx === null} onClick={() => setPosIdx(null)} />
             {positions.map((startFret, i) => (
               <Chip
                 key={i}
@@ -168,7 +173,7 @@ export function ScaleView() {
 
       {!ready && (
         <p className="text-sm" style={{ color: 'var(--color-on-surface-muted)' }}>
-          Выберите ноту и гамму выше
+          {t('scales.selectHint')}
         </p>
       )}
     </div>

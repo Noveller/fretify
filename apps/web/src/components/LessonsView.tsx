@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MODULES, type Lesson } from '../lessons/lessonData';
 import { useProgress } from '../lessons/useProgress';
 import { LessonSession } from './LessonSession';
@@ -23,10 +24,11 @@ function CheckIcon() {
 }
 
 function LessonCard({
-  lesson, locked, completed, onClick,
+  lesson, moduleId, locked, completed, onClick,
 }: {
-  lesson: Lesson; locked: boolean; completed: boolean; onClick: () => void;
+  lesson: Lesson; moduleId: string; locked: boolean; completed: boolean; onClick: () => void;
 }) {
+  const { t } = useTranslation();
   return (
     <button
       onClick={locked ? undefined : onClick}
@@ -48,10 +50,10 @@ function LessonCard({
       <div className="flex items-center justify-between gap-3">
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-sm truncate" style={{ color: 'var(--color-on-surface)' }}>
-            {lesson.title}
+            {t(`lessons.modules.${moduleId}.${lesson.id}.title`)}
           </p>
           <p className="text-xs mt-0.5" style={{ color: 'var(--color-on-surface-muted)' }}>
-            {lesson.subtitle}
+            {t(`lessons.modules.${moduleId}.${lesson.id}.subtitle`)}
           </p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
@@ -69,6 +71,7 @@ function LessonCard({
 }
 
 export function LessonsView() {
+  const { t } = useTranslation();
   const { completed, markComplete } = useProgress();
   const [active, setActive] = useState<{ lesson: Lesson } | null>(null);
 
@@ -107,7 +110,7 @@ export function LessonsView() {
         style={{ backgroundColor: 'var(--color-surface-2)' }}>
         <div>
           <p className="text-xs font-medium uppercase tracking-widest mb-0.5"
-            style={{ color: 'var(--color-on-surface-muted)' }}>Прогресс</p>
+            style={{ color: 'var(--color-on-surface-muted)' }}>{t('lessons.progressTitle')}</p>
           <p className="text-2xl font-bold" style={{ color: 'var(--color-on-surface)' }}>
             {totalXP} XP
           </p>
@@ -120,10 +123,10 @@ export function LessonsView() {
         <div key={module.id} className="flex flex-col gap-3">
           <div>
             <h2 className="text-base font-bold" style={{ color: 'var(--color-on-surface)' }}>
-              {module.title}
+              {t(`lessons.modules.${module.id}.title`)}
             </h2>
             <p className="text-xs mt-0.5" style={{ color: 'var(--color-on-surface-muted)' }}>
-              {module.subtitle}
+              {t(`lessons.modules.${module.id}.subtitle`)}
             </p>
           </div>
 
@@ -131,7 +134,7 @@ export function LessonsView() {
             <div className="rounded-xl p-4 text-center"
               style={{ backgroundColor: 'var(--color-surface-2)', opacity: 0.5 }}>
               <p className="text-sm" style={{ color: 'var(--color-on-surface-muted)' }}>
-                Скоро
+                {t('common.comingSoon')}
               </p>
             </div>
           ) : (
@@ -140,6 +143,7 @@ export function LessonsView() {
                 <LessonCard
                   key={lesson.id}
                   lesson={lesson}
+                  moduleId={module.id}
                   locked={isLocked(lesson)}
                   completed={completed.has(lesson.id)}
                   onClick={() => setActive({ lesson })}

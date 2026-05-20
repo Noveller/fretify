@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   metronomeStart, metronomeStop,
   metronomeSetBPM, metronomeSetSound, metronomeSetPattern, metronomeSetCallback,
@@ -17,11 +18,6 @@ const TIME_SIGS: { label: string; pattern: BeatType[] }[] = [
   { label: '6/8', pattern: ['accent', 'normal', 'normal', 'accent', 'normal', 'normal'] },
 ];
 
-const SOUNDS: { value: SoundType; label: string }[] = [
-  { value: 'click', label: 'Клик' },
-  { value: 'wood',  label: 'Дерево' },
-  { value: 'bell',  label: 'Звонок' },
-];
 
 const BEAT_CYCLE: BeatType[] = ['accent', 'normal', 'silent'];
 
@@ -44,6 +40,14 @@ function beatFg(t: BeatType, active: boolean): string {
 }
 
 export function Metronome() {
+  const { t } = useTranslation();
+
+  const SOUNDS = [
+    { value: 'click' as SoundType, label: t('metronome.soundClick') },
+    { value: 'wood'  as SoundType, label: t('metronome.soundWood')  },
+    { value: 'bell'  as SoundType, label: t('metronome.soundBell')  },
+  ];
+
   const [bpm, setBpm]           = useState(120);
   const [sound, setSound]       = useState<SoundType>('click');
   const [pattern, setPattern]   = useState<BeatType[]>(['accent', 'normal', 'normal', 'normal']);
@@ -144,7 +148,7 @@ export function Metronome() {
             className="px-5 py-2 rounded-lg text-sm font-medium transition-all hover:opacity-80 active:scale-95"
             style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-on-surface)',
               border: '1px solid var(--color-fret)' }}
-          >Тап</button>
+          >{t('metronome.tap')}</button>
           <span>{BPM_MAX}</span>
         </div>
       </div>
@@ -152,7 +156,7 @@ export function Metronome() {
       {/* Sound selector */}
       <div className="flex flex-col gap-2">
         <span className="text-xs font-medium uppercase tracking-widest"
-          style={{ color: 'var(--color-on-surface-muted)' }}>Звук</span>
+          style={{ color: 'var(--color-on-surface-muted)' }}>{t('metronome.sound')}</span>
         <div className="flex gap-2">
           {SOUNDS.map(s => (
             <button key={s.value} onClick={() => setSound(s.value)}
@@ -170,7 +174,7 @@ export function Metronome() {
       {/* Time signature presets */}
       <div className="flex flex-col gap-2">
         <span className="text-xs font-medium uppercase tracking-widest"
-          style={{ color: 'var(--color-on-surface-muted)' }}>Размер</span>
+          style={{ color: 'var(--color-on-surface-muted)' }}>{t('metronome.timeSig')}</span>
         <div className="flex gap-2 flex-wrap">
           {TIME_SIGS.map(ts => (
             <button key={ts.label} onClick={() => applyTimeSig(ts.pattern)}
@@ -184,7 +188,7 @@ export function Metronome() {
       {/* Beat pattern editor */}
       <div className="flex flex-col gap-3">
         <span className="text-xs font-medium uppercase tracking-widest"
-          style={{ color: 'var(--color-on-surface-muted)' }}>Ритмический рисунок</span>
+          style={{ color: 'var(--color-on-surface-muted)' }}>{t('metronome.pattern')}</span>
 
         <div className="flex gap-2 flex-wrap">
           {pattern.map((beat, i) => {
@@ -203,7 +207,7 @@ export function Metronome() {
               >
                 <span style={{ fontSize: 18 }}>{i + 1}</span>
                 <span style={{ fontSize: 8, opacity: 0.75, letterSpacing: '0.03em', marginTop: 1 }}>
-                  {beat === 'accent' ? 'АКЦЕНТ' : beat === 'normal' ? 'УДАР' : 'ПАУЗА'}
+                  {beat === 'accent' ? t('metronome.beatAccent') : beat === 'normal' ? t('metronome.beatNormal') : t('metronome.beatSilent')}
                 </span>
               </button>
             );
@@ -223,7 +227,7 @@ export function Metronome() {
         </div>
 
         <p className="text-xs" style={{ color: 'var(--color-on-surface-muted)' }}>
-          Нажмите на долю чтобы изменить: акцент → удар → пауза
+          {t('metronome.patternHint')}
         </p>
       </div>
 
@@ -237,7 +241,7 @@ export function Metronome() {
             : { backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }
         }
       >
-        {running ? 'Стоп' : 'Старт'}
+        {running ? t('common.stop') : t('common.start')}
       </button>
     </div>
   );

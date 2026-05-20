@@ -1,13 +1,8 @@
+import { useTranslation } from 'react-i18next';
 import { useLessonEngine } from '../lessons/useLessonEngine';
 import { ChordHearExercise } from './exercises/ChordHearExercise';
 import { ScaleHearExercise } from './exercises/ScaleHearExercise';
-import { SCALES } from '@fretify/core';
 import type { Lesson } from '../lessons/lessonData';
-
-function scaleLabel(name: string): string {
-  const found = SCALES.find(s => s.name === name);
-  return found?.category === 'pentatonic' ? `${name} (пент.)` : name;
-}
 
 interface Props {
   lesson: Lesson;
@@ -25,6 +20,10 @@ function Heart({ filled }: { filled: boolean }) {
 }
 
 export function LessonSession({ lesson, onComplete, onExit }: Props) {
+  const { t } = useTranslation();
+  const scaleNames = t('scales.names', { returnObjects: true }) as Record<string, string>;
+  const tScale = (name: string) => scaleNames[name] ?? name;
+
   const engine = useLessonEngine(lesson.exercises);
   const { exercise, idx, total, lives, xp, phase, lastCorrect, submit, advance } = engine;
 
@@ -34,10 +33,10 @@ export function LessonSession({ lesson, onComplete, onExit }: Props) {
         <div className="text-6xl">🎸</div>
         <div>
           <p className="text-2xl font-bold mb-1" style={{ color: 'var(--color-on-surface)' }}>
-            Урок пройден!
+            {t('lessons.lessonComplete')}
           </p>
           <p className="text-sm" style={{ color: 'var(--color-on-surface-muted)' }}>
-            +{xp} XP заработано
+            {t('lessons.xpEarned', { xp })}
           </p>
         </div>
         <button
@@ -45,7 +44,7 @@ export function LessonSession({ lesson, onComplete, onExit }: Props) {
           className="px-8 py-3 rounded-xl text-base font-bold"
           style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }}
         >
-          Продолжить
+          {t('common.continue')}
         </button>
       </div>
     );
@@ -57,10 +56,10 @@ export function LessonSession({ lesson, onComplete, onExit }: Props) {
         <div className="text-6xl">💔</div>
         <div>
           <p className="text-2xl font-bold mb-1" style={{ color: 'var(--color-on-surface)' }}>
-            Жизни закончились
+            {t('lessons.noLives')}
           </p>
           <p className="text-sm" style={{ color: 'var(--color-on-surface-muted)' }}>
-            Попробуй ещё раз
+            {t('lessons.tryAgain')}
           </p>
         </div>
         <div className="flex gap-3">
@@ -68,12 +67,12 @@ export function LessonSession({ lesson, onComplete, onExit }: Props) {
             className="px-6 py-3 rounded-xl text-base font-medium"
             style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-on-surface)',
               border: '1px solid var(--color-fret)' }}>
-            Выйти
+            {t('common.exit')}
           </button>
           <button onClick={engine.reset}
             className="px-6 py-3 rounded-xl text-base font-bold"
             style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }}>
-            Повторить
+            {t('common.retry')}
           </button>
         </div>
       </div>
@@ -133,12 +132,12 @@ export function LessonSession({ lesson, onComplete, onExit }: Props) {
           }}>
           <div>
             <p className="font-bold text-base" style={{ color: lastCorrect ? '#16a34a' : '#dc2626' }}>
-              {lastCorrect ? 'Правильно!' : 'Неверно'}
+              {lastCorrect ? t('lessons.correct') : t('lessons.wrong')}
             </p>
             {!lastCorrect && (
               <p className="text-sm" style={{ color: '#dc2626' }}>
-                Правильный ответ:{' '}
-                {exercise.type === 'chord-hear' ? exercise.chord : scaleLabel(exercise.scale)}
+                {t('lessons.correctAnswer')}:{' '}
+                {exercise.type === 'chord-hear' ? exercise.chord : tScale(exercise.scale)}
               </p>
             )}
           </div>
@@ -150,7 +149,7 @@ export function LessonSession({ lesson, onComplete, onExit }: Props) {
               color: '#fff',
             }}
           >
-            Продолжить
+            {t('common.continue')}
           </button>
         </div>
       )}

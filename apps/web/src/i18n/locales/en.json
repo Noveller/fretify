@@ -1,0 +1,160 @@
+{
+  "nav": {
+    "chords": "Chords",
+    "scales": "Scales",
+    "metronome": "Metronome",
+    "drums": "Drums",
+    "lessons": "Lessons",
+    "about": "About"
+  },
+  "common": {
+    "start": "Start",
+    "stop": "Stop",
+    "play": "Play",
+    "playing": "Playing...",
+    "all": "All",
+    "comingSoon": "Coming soon",
+    "share": "Share",
+    "support": "Support",
+    "exit": "Exit",
+    "retry": "Retry",
+    "continue": "Continue"
+  },
+  "chords": {
+    "sectionNote": "Note",
+    "sectionQuality": "Type",
+    "sectionBass": "Bass",
+    "selectHint": "Select a note and chord type above"
+  },
+  "scales": {
+    "sectionNote": "Note",
+    "sectionPosition": "Position",
+    "categoryScale": "Scales",
+    "categoryMode": "Modes",
+    "categoryPentatonic": "Pentatonics",
+    "selectHint": "Select a note and scale above",
+    "names": {
+      "Мажор": "Major",
+      "Минор": "Minor",
+      "Гарм. минор": "Harm. Minor",
+      "Мел. минор": "Mel. Minor",
+      "Дориан": "Dorian",
+      "Фригийский": "Phrygian",
+      "Лидийский": "Lydian",
+      "Миксолидийский": "Mixolydian",
+      "Локрийский": "Locrian",
+      "Фриг. доминанта": "Phryg. Dom.",
+      "Мажорная": "Major pent.",
+      "Минорная": "Minor pent.",
+      "Блюз": "Blues"
+    }
+  },
+  "metronome": {
+    "sound": "Sound",
+    "soundClick": "Click",
+    "soundWood": "Wood",
+    "soundBell": "Bell",
+    "timeSig": "Time",
+    "pattern": "Rhythmic pattern",
+    "patternHint": "Click a beat to change: accent → beat → pause",
+    "tap": "Tap",
+    "beatAccent": "ACCENT",
+    "beatNormal": "BEAT",
+    "beatSilent": "PAUSE"
+  },
+  "drums": {
+    "patternLabel": "Pattern",
+    "presets": {
+      "Пусто": "Empty",
+      "Базовый": "Basic",
+      "Рок": "Rock",
+      "Фанк": "Funk",
+      "Хип-хоп": "Hip-Hop",
+      "Трэп": "Trap",
+      "Регги": "Reggae",
+      "Диско": "Disco",
+      "Джаз": "Jazz",
+      "Самба": "Samba"
+    }
+  },
+  "lessons": {
+    "progressTitle": "Progress",
+    "correct": "Correct!",
+    "wrong": "Wrong",
+    "correctAnswer": "Correct answer",
+    "lessonComplete": "Lesson complete!",
+    "xpEarned": "+{{xp}} XP earned",
+    "noLives": "No lives left",
+    "tryAgain": "Try again",
+    "chordHearPrompt": "Which chord do you hear?",
+    "scaleHearPrompt": "Which scale sounds from note {{note}}?",
+    "clickToListen": "Click to listen",
+    "playingDots": "Playing...",
+    "modules": {
+      "chords": {
+        "title": "Chords",
+        "subtitle": "Learn to hear and recognize chords by ear",
+        "chords-minor": { "title": "Minor chords", "subtitle": "Am · Em · Dm · Bm" },
+        "chords-major": { "title": "Major chords", "subtitle": "C · G · D · A · E" },
+        "chords-mixed": { "title": "Major & minor", "subtitle": "Am · Em · C · G · D" }
+      },
+      "scales": {
+        "title": "Scales",
+        "subtitle": "Learn to hear the character of scales and modes",
+        "scales-major-minor": { "title": "Major & minor", "subtitle": "The most important difference" },
+        "scales-pentatonic":  { "title": "Pentatonics", "subtitle": "Major · Minor · Blues" },
+        "scales-modes":       { "title": "Modes", "subtitle": "Dorian · Phrygian · Mixolydian" }
+      },
+      "rhythm": {
+        "title": "Rhythm",
+        "subtitle": "Coming soon"
+      }
+    }
+  },
+  "about": {
+    "heroTitle": "Hello",
+    "heroText": "My name is <1>Alex</1> — the creator of Fretify. I'm a frontend developer and guitarist. I've been playing guitar for several years and, like many, ran into the same problem:",
+    "heroQuote": "I could play songs, but the guitar fretboard remained a \"confusing map\" to me.",
+    "whyTitle": "Why Fretify exists",
+    "whyIntro": "Learning the fretboard is one of the hardest tasks for guitarists. You learn:",
+    "whyItems": ["chord shapes", "tabs", "scale patterns"],
+    "whyResult": "But in the end, the fretboard still feels like something you have to \"recall\" rather than understand.",
+    "whyFretify": "I built Fretify because I was missing a simple tool that helps you:",
+    "whyFretifyItems": [
+      "visually understand the fretboard",
+      "connect theory with real positions",
+      "practice scales and notes in a clear way",
+      "build muscle memory and visual fretboard awareness"
+    ],
+    "ideaTitle": "The idea",
+    "ideaIntro": "Fretify is more than a note visualizer. It's a learning tool that helps you:",
+    "ideaItems": [
+      "see notes instantly",
+      "study scales and chords visually",
+      "memorize fretboard patterns",
+      "gradually stop thinking in tabs and start thinking in music"
+    ],
+    "goalTitle": "My goal",
+    "goalIntro": "My goal is simple:",
+    "goalHighlight": "help guitarists truly understand the fretboard, not just memorize it.",
+    "goalDetail": "I want Fretify to be a daily practice tool — something you open for 5–10 minutes a day and gradually become more confident in music.",
+    "whyContinueTitle": "Why I keep developing it",
+    "whyContinueIntro": "This project is personal. It brings together two worlds of mine:",
+    "sphere1": "development",
+    "sphere2": "music",
+    "whyContinueResult": "I keep developing it because I believe: learning guitar should be visual, simple and enjoyable — not frustrating.",
+    "supportTitle": "Support",
+    "supportText": "If Fretify has been useful, you can support the project by sharing it or making a donation. Any support helps me keep building new features and learning modes.",
+    "footer": "made with ❤️ — Alex (chakopss)"
+  },
+  "seo": {
+    "defaultTitle": "Fretify — Learn the guitar fretboard",
+    "defaultDesc": "Chords, scales, metronome, drum machine and lessons for guitarists. Free in the browser.",
+    "/chords":    { "title": "Guitar chords — Fretify",       "desc": "Find chords and positions on the guitar fretboard. Barre and open chord diagrams in all keys." },
+    "/scales":    { "title": "Guitar scales & modes — Fretify","desc": "Explore major, minor, pentatonics and modes on the guitar fretboard with playback." },
+    "/metronome": { "title": "Online metronome — Fretify",     "desc": "Free online metronome for guitarists. Set tempo, rhythmic patterns and sound types." },
+    "/drums":     { "title": "Online drum machine — Fretify",  "desc": "Create rhythm patterns in the browser. 10 styles: rock, funk, hip-hop, trap, reggae, jazz." },
+    "/lessons":   { "title": "Guitar lessons online — Fretify","desc": "Interactive Duolingo-style lessons for guitarists. Learn to hear chords and scales by ear." },
+    "/about":     { "title": "About — Fretify",                "desc": "Fretify — a guitar fretboard learning tool built by a guitarist and developer." }
+  }
+}

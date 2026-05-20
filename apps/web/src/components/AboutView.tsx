@@ -1,3 +1,5 @@
+import { useTranslation, Trans } from 'react-i18next';
+
 interface SectionProps {
   emoji: string;
   title: string;
@@ -34,6 +36,12 @@ function Divider() {
 }
 
 export function AboutView() {
+  const { t } = useTranslation();
+
+  const whyItems         = t('about.whyItems',         { returnObjects: true }) as string[];
+  const whyFretifyItems  = t('about.whyFretifyItems',  { returnObjects: true }) as string[];
+  const ideaItems        = t('about.ideaItems',        { returnObjects: true }) as string[];
+
   return (
     <div className="w-full max-w-xl mx-auto flex flex-col gap-8">
 
@@ -41,88 +49,71 @@ export function AboutView() {
       <div className="rounded-2xl p-6 flex flex-col gap-3"
         style={{ backgroundColor: 'var(--color-surface-2)' }}>
         <p className="text-2xl font-bold" style={{ color: 'var(--color-on-surface)' }}>
-          👋 Привет
+          👋 {t('about.heroTitle')}
         </p>
         <p className="text-sm leading-relaxed" style={{ color: 'var(--color-on-surface-muted)' }}>
-          Меня зовут <strong style={{ color: 'var(--color-on-surface)' }}>Alex</strong> —
-          создатель Fretify. Я фронтенд-разработчик и гитарист. Играю на гитаре уже
-          несколько лет и, как многие, прошёл через одну и ту же проблему:
+          <Trans
+            i18nKey="about.heroText"
+            components={{ 1: <strong style={{ color: 'var(--color-on-surface)' }} /> }}
+          />
         </p>
         <p className="text-sm italic px-4 py-3 rounded-xl"
           style={{ color: 'var(--color-on-surface)', backgroundColor: 'var(--color-surface)',
             borderLeft: '3px solid var(--color-accent)' }}>
-          я мог играть песни, но гриф гитары оставался для меня "непонятной картой".
+          {t('about.heroQuote')}
         </p>
       </div>
 
       <Divider />
 
-      <Section emoji="🎯" title="Зачем существует Fretify">
-        <p>Изучение грифа — одна из самых сложных задач для гитаристов. Ты учишь:</p>
+      <Section emoji="🎯" title={t('about.whyTitle')}>
+        <p>{t('about.whyIntro')}</p>
         <div className="flex flex-col gap-1 pl-1">
-          <Bullet>формы аккордов</Bullet>
-          <Bullet>табы</Bullet>
-          <Bullet>паттерны гамм</Bullet>
+          {whyItems.map((item, i) => <Bullet key={i}>{item}</Bullet>)}
         </div>
-        <p>
-          Но в итоге гриф всё равно остаётся чем-то, что приходится "вспоминать",
-          а не понимать.
-        </p>
-        <p>Я создал Fretify, потому что мне не хватало простого инструмента, который помогает:</p>
+        <p>{t('about.whyResult')}</p>
+        <p>{t('about.whyFretify')}</p>
         <div className="flex flex-col gap-1 pl-1">
-          <Bullet>визуально понимать гриф</Bullet>
-          <Bullet>связывать теорию с реальными позициями</Bullet>
-          <Bullet>тренировать гаммы и ноты в понятной форме</Bullet>
-          <Bullet>развивать мышечную и визуальную память грифа</Bullet>
+          {whyFretifyItems.map((item, i) => <Bullet key={i}>{item}</Bullet>)}
         </div>
       </Section>
 
       <Divider />
 
-      <Section emoji="🧠" title="Идея проекта">
-        <p>Fretify — это не просто визуализация нот.</p>
-        <p>Это инструмент для обучения, который помогает:</p>
+      <Section emoji="🧠" title={t('about.ideaTitle')}>
+        <p>{t('about.ideaIntro')}</p>
         <div className="flex flex-col gap-1 pl-1">
-          <Bullet>видеть ноты мгновенно</Bullet>
-          <Bullet>изучать гаммы и аккорды наглядно</Bullet>
-          <Bullet>запоминать закономерности грифа</Bullet>
-          <Bullet>постепенно перестать думать в табах и начать думать в музыке</Bullet>
+          {ideaItems.map((item, i) => <Bullet key={i}>{item}</Bullet>)}
         </div>
       </Section>
 
       <Divider />
 
-      <Section emoji="🚀" title="Моя цель">
-        <p>Моя цель проста:</p>
+      <Section emoji="🚀" title={t('about.goalTitle')}>
+        <p>{t('about.goalIntro')}</p>
         <p className="font-medium" style={{ color: 'var(--color-on-surface)' }}>
-          помочь гитаристам действительно понять гриф, а не просто заучить его.
+          {t('about.goalHighlight')}
         </p>
-        <p>
-          Я хочу, чтобы Fretify стал инструментом для ежедневной практики — тем, что
-          открываешь на 5–10 минут в день и постепенно становишься увереннее в музыке.
-        </p>
+        <p>{t('about.goalDetail')}</p>
       </Section>
 
       <Divider />
 
-      <Section emoji="❤️" title="Почему я продолжаю развивать проект">
-        <p>Этот проект для меня личный. Он объединяет две мои сферы:</p>
+      <Section emoji="❤️" title={t('about.whyContinueTitle')}>
+        <p>{t('about.whyContinueIntro')}</p>
         <div className="flex gap-3 mt-1">
           <div className="flex-1 rounded-xl px-4 py-3 text-center"
             style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-on-surface)' }}>
             <div className="text-lg mb-1">💻</div>
-            <div className="text-xs font-medium">разработка</div>
+            <div className="text-xs font-medium">{t('about.sphere1')}</div>
           </div>
           <div className="flex-1 rounded-xl px-4 py-3 text-center"
             style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-on-surface)' }}>
             <div className="text-lg mb-1">🎸</div>
-            <div className="text-xs font-medium">музыка</div>
+            <div className="text-xs font-medium">{t('about.sphere2')}</div>
           </div>
         </div>
-        <p>
-          Я продолжаю его развивать, потому что верю: обучение гитаре должно быть
-          визуальным, простым и приятным, а не сложным и раздражающим.
-        </p>
+        <p>{t('about.whyContinueResult')}</p>
       </Section>
 
       <Divider />
@@ -132,12 +123,10 @@ export function AboutView() {
         style={{ backgroundColor: 'var(--color-surface-2)' }}>
         <div>
           <h2 className="text-lg font-bold mb-1" style={{ color: 'var(--color-on-surface)' }}>
-            🙏 Поддержка
+            🙏 {t('about.supportTitle')}
           </h2>
           <p className="text-sm leading-relaxed" style={{ color: 'var(--color-on-surface-muted)' }}>
-            Если Fretify оказался полезным, ты можешь поддержать проект — поделившись им
-            или сделав донат. Любая поддержка помогает развивать инструмент и добавлять
-            новые обучающие режимы.
+            {t('about.supportText')}
           </p>
         </div>
         <div className="flex gap-3">
@@ -147,7 +136,7 @@ export function AboutView() {
             style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-on-surface)',
               border: '1px solid var(--color-fret)' }}
           >
-            Поделиться
+            {t('common.share')}
           </button>
           <a
             href="https://www.buymeacoffee.com/chakopss"
@@ -156,14 +145,14 @@ export function AboutView() {
             className="flex-1 py-2.5 rounded-xl text-sm font-medium text-center transition-all hover:opacity-90"
             style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }}
           >
-            ☕ Поддержать
+            ☕ {t('common.support')}
           </a>
         </div>
       </div>
 
       {/* Footer signature */}
       <p className="text-center text-xs pb-2" style={{ color: 'var(--color-on-surface-muted)' }}>
-        сделано с ❤️ — Alex (chakopss)
+        {t('about.footer')}
       </p>
     </div>
   );

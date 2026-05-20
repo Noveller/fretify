@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   drumMachineStart, drumMachineStop, drumMachineSetBPM,
   drumMachineSetStep, drumMachineSetCallback, drumMachineSetPattern,
@@ -110,6 +111,7 @@ function Row({ label, renderCell }: {
 }
 
 export function DrumMachine() {
+  const { t } = useTranslation();
   const [bpm, setBpm]             = useState(120);
   const [running, setRunning]     = useState(false);
   const [currentStep, setCurrent] = useState<number | null>(null);
@@ -183,20 +185,20 @@ export function DrumMachine() {
             : { backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)',
                 boxShadow: '0 0 16px color-mix(in srgb, var(--color-accent) 40%, transparent)' }}>
           <span style={{ fontSize: 16 }}>{running ? '■' : '▶'}</span>
-          {running ? 'Стоп' : 'Старт'}
+          {running ? t('common.stop') : t('common.start')}
         </button>
       </div>
 
       {/* Presets row */}
       <div className="flex items-center gap-2 flex-wrap">
         <span className="text-xs font-medium uppercase tracking-widest shrink-0"
-          style={{ color: 'var(--color-on-surface-muted)' }}>Паттерн</span>
+          style={{ color: 'var(--color-on-surface-muted)' }}>{t('drums.patternLabel')}</span>
         {PRESETS.map(p => (
           <button key={p.label} onClick={() => applyPreset(p)}
             className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all hover:opacity-80"
             style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-on-surface)',
               border: '1px solid var(--color-fret)' }}>
-            {p.label}
+            {t(`drums.presets.${p.label}`)}
           </button>
         ))}
       </div>
