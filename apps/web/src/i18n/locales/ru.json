@@ -89,6 +89,7 @@
     "chordHearPrompt": "Какой аккорд ты слышишь?",
     "scaleHearPrompt": "Какая гамма звучит от ноты {{note}}?",
     "clickToListen": "Нажми чтобы прослушать",
+    "noteOnFretPrompt": "Какая нота здесь?",
     "playingDots": "Играет...",
     "modules": {
       "chords": {
@@ -105,6 +106,12 @@
         "scales-major-minor": { "title": "Мажор и минор", "subtitle": "Самое главное различие" },
         "scales-pentatonic":  { "title": "Пентатоники", "subtitle": "Мажорная · Минорная · Блюз" },
         "scales-modes":       { "title": "Лады", "subtitle": "Дориан · Фригийский · Миксолидийский" }
+      },
+      "fretboard": {
+        "title": "Гриф",
+        "subtitle": "Учись ориентироваться на грифе",
+        "fretboard-open":    { "title": "Открытые струны",   "subtitle": "E · A · D · G · B · e" },
+        "fretboard-natural": { "title": "Натуральные ноты",  "subtitle": "C · D · E · F · G · A · B" }
       },
       "rhythm": {
         "title": "Ритм",

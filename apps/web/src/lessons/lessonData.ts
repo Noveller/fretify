@@ -1,6 +1,7 @@
 export type ExerciseDef =
   | { type: 'chord-hear'; chord: string; distractors: [string, string, string] }
-  | { type: 'scale-hear'; rootNote: number; scale: string; distractors: [string, string, string] };
+  | { type: 'scale-hear'; rootNote: number; scale: string; distractors: [string, string, string] }
+  | { type: 'note-on-fret'; stringIdx: number; fret: number; distractors: [string, string, string] };
 
 export interface Lesson {
   id: string;
@@ -152,6 +153,47 @@ export const MODULES: Module[] = [
           { type: 'scale-hear', rootNote: 7, scale: 'Лидийский',    distractors: ['Мажор',       'Миксолидийский','Дориан']         },
           { type: 'scale-hear', rootNote: 9, scale: 'Дориан',       distractors: ['Минор',       'Миксолидийский','Фригийский']     },
           { type: 'scale-hear', rootNote: 9, scale: 'Локрийский',   distractors: ['Фригийский',  'Минор',         'Дориан']         },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'fretboard',
+    title: 'Гриф',
+    subtitle: 'Учись ориентироваться на грифе',
+    lessons: [
+      {
+        id: 'fretboard-open',
+        title: 'Открытые струны',
+        subtitle: 'E · A · D · G · B · e',
+        xpReward: 10,
+        exercises: [
+          { type: 'note-on-fret', stringIdx: 0, fret: 0, distractors: ['A', 'D', 'G'] },
+          { type: 'note-on-fret', stringIdx: 1, fret: 0, distractors: ['E', 'D', 'B'] },
+          { type: 'note-on-fret', stringIdx: 2, fret: 0, distractors: ['A', 'G', 'E'] },
+          { type: 'note-on-fret', stringIdx: 3, fret: 0, distractors: ['D', 'B', 'E'] },
+          { type: 'note-on-fret', stringIdx: 4, fret: 0, distractors: ['E', 'G', 'A'] },
+          { type: 'note-on-fret', stringIdx: 5, fret: 0, distractors: ['A', 'B', 'D'] },
+          { type: 'note-on-fret', stringIdx: 1, fret: 0, distractors: ['G', 'B', 'D'] },
+          { type: 'note-on-fret', stringIdx: 3, fret: 0, distractors: ['A', 'E', 'D'] },
+        ],
+      },
+      {
+        id: 'fretboard-natural',
+        title: 'Натуральные ноты',
+        subtitle: 'C · D · E · F · G · A · B',
+        xpReward: 15,
+        exercises: [
+          { type: 'note-on-fret', stringIdx: 1, fret: 2, distractors: ['A', 'C', 'D'] },  // B
+          { type: 'note-on-fret', stringIdx: 1, fret: 3, distractors: ['B', 'D', 'A'] },  // C
+          { type: 'note-on-fret', stringIdx: 1, fret: 5, distractors: ['C', 'E', 'B'] },  // D
+          { type: 'note-on-fret', stringIdx: 2, fret: 2, distractors: ['D', 'F', 'G'] },  // E
+          { type: 'note-on-fret', stringIdx: 2, fret: 3, distractors: ['E', 'G', 'D'] },  // F
+          { type: 'note-on-fret', stringIdx: 2, fret: 5, distractors: ['F', 'A', 'E'] },  // G
+          { type: 'note-on-fret', stringIdx: 3, fret: 2, distractors: ['G', 'B', 'F'] },  // A
+          { type: 'note-on-fret', stringIdx: 3, fret: 4, distractors: ['A', 'C', 'G'] },  // B
+          { type: 'note-on-fret', stringIdx: 4, fret: 1, distractors: ['B', 'D', 'E'] },  // C
+          { type: 'note-on-fret', stringIdx: 0, fret: 1, distractors: ['E', 'G', 'D'] },  // F
         ],
       },
     ],

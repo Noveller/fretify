@@ -89,6 +89,7 @@
     "chordHearPrompt": "Ce acord auzi?",
     "scaleHearPrompt": "Ce gamă sună de la nota {{note}}?",
     "clickToListen": "Apasă pentru a asculta",
+    "noteOnFretPrompt": "Ce notă este aceasta?",
     "playingDots": "Redare...",
     "modules": {
       "chords": {
@@ -105,6 +106,12 @@
         "scales-major-minor": { "title": "Major și minor", "subtitle": "Cea mai importantă diferență" },
         "scales-pentatonic":  { "title": "Pentatonice", "subtitle": "Majoră · Minoră · Blues" },
         "scales-modes":       { "title": "Moduri", "subtitle": "Dorian · Frigian · Mixolidian" }
+      },
+      "fretboard": {
+        "title": "Grifă",
+        "subtitle": "Învață să te orientezi pe grifă",
+        "fretboard-open":    { "title": "Corzi libere",    "subtitle": "E · A · D · G · B · e" },
+        "fretboard-natural": { "title": "Note naturale",   "subtitle": "C · D · E · F · G · A · B" }
       },
       "rhythm": {
         "title": "Ritm",

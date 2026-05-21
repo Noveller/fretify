@@ -89,6 +89,7 @@
     "chordHearPrompt": "Which chord do you hear?",
     "scaleHearPrompt": "Which scale sounds from note {{note}}?",
     "clickToListen": "Click to listen",
+    "noteOnFretPrompt": "What note is this?",
     "playingDots": "Playing...",
     "modules": {
       "chords": {
@@ -105,6 +106,12 @@
         "scales-major-minor": { "title": "Major & minor", "subtitle": "The most important difference" },
         "scales-pentatonic":  { "title": "Pentatonics", "subtitle": "Major · Minor · Blues" },
         "scales-modes":       { "title": "Modes", "subtitle": "Dorian · Phrygian · Mixolydian" }
+      },
+      "fretboard": {
+        "title": "Fretboard",
+        "subtitle": "Learn to navigate the fretboard",
+        "fretboard-open":    { "title": "Open strings",   "subtitle": "E · A · D · G · B · e" },
+        "fretboard-natural": { "title": "Natural notes",  "subtitle": "C · D · E · F · G · A · B" }
       },
       "rhythm": {
         "title": "Rhythm",

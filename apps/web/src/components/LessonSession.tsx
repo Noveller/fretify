@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next';
+import { indexToNote, STANDARD_TUNING } from '@fretify/core';
 import { useLessonEngine } from '../lessons/useLessonEngine';
 import { ChordHearExercise } from './exercises/ChordHearExercise';
 import { ScaleHearExercise } from './exercises/ScaleHearExercise';
+import { NoteOnFretExercise } from './exercises/NoteOnFretExercise';
 import type { Lesson } from '../lessons/lessonData';
 
 interface Props {
@@ -121,6 +123,15 @@ export function LessonSession({ lesson, onComplete, onExit }: Props) {
             onAnswer={submit}
           />
         )}
+        {exercise.type === 'note-on-fret' && (
+          <NoteOnFretExercise
+            stringIdx={exercise.stringIdx}
+            fret={exercise.fret}
+            distractors={exercise.distractors}
+            disabled={inFeedback}
+            onAnswer={submit}
+          />
+        )}
       </div>
 
       {/* Feedback panel */}
@@ -137,7 +148,9 @@ export function LessonSession({ lesson, onComplete, onExit }: Props) {
             {!lastCorrect && (
               <p className="text-sm" style={{ color: '#dc2626' }}>
                 {t('lessons.correctAnswer')}:{' '}
-                {exercise.type === 'chord-hear' ? exercise.chord : tScale(exercise.scale)}
+                {exercise.type === 'chord-hear'   ? exercise.chord
+                : exercise.type === 'scale-hear'  ? tScale(exercise.scale)
+                : indexToNote((STANDARD_TUNING[exercise.stringIdx] + exercise.fret) % 12)}
               </p>
             )}
           </div>

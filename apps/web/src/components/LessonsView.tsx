@@ -97,10 +97,8 @@ export function LessonsView() {
   // Flatten all lessons to determine unlock order globally
   const allLessons = MODULES.flatMap(m => m.lessons);
 
-  function isLocked(lesson: Lesson): boolean {
-    const idx = allLessons.findIndex(l => l.id === lesson.id);
-    if (idx === 0) return false;
-    return !completed.has(allLessons[idx - 1].id);
+  function isLocked(_lesson: Lesson): boolean {
+    return false; // temp: all unlocked for testing
   }
 
   return (
