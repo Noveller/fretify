@@ -195,10 +195,10 @@ export function App() {
         <Routes>
           <Route path="/"          element={<Navigate to="/chords" replace />} />
           <Route path="/chords"    element={<ChordsPage />} />
-          <Route path="/scales"    element={<PremiumGate feature="Гаммы, лады и позиции на грифе"><ScaleView /></PremiumGate>} />
-          <Route path="/metronome" element={<PremiumGate feature="Метроном с кастомными ритмами и паттернами"><Metronome /></PremiumGate>} />
-          <Route path="/drums"     element={<PremiumGate feature="Драм-машина с 10 стилями"><DrumMachine /></PremiumGate>} />
-          <Route path="/lessons"   element={<PremiumGate feature="Все уроки по аккордам, гаммам и грифу"><LessonsView /></PremiumGate>} />
+          <Route path="/scales"    element={<PremiumGate feature={t('common.premiumScales')}><ScaleView /></PremiumGate>} />
+          <Route path="/metronome" element={<PremiumGate feature={t('common.premiumMetronome')}><Metronome /></PremiumGate>} />
+          <Route path="/drums"     element={<PremiumGate feature={t('common.premiumDrums')}><DrumMachine /></PremiumGate>} />
+          <Route path="/lessons"   element={<PremiumGate feature={t('common.premiumLessons')}><LessonsView /></PremiumGate>} />
           <Route path="/about"     element={<AboutView />} />
         </Routes>
       </main>

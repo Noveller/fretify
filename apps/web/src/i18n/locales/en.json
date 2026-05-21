@@ -30,7 +30,11 @@
     "understood": "Got it",
     "premiumFeature": "Premium feature",
     "signInToAccess": "Sign in / Register",
-    "signInHint": "After signing in you can subscribe"
+    "signInHint": "After signing in you can subscribe",
+    "premiumScales": "Scales, modes and fretboard positions",
+    "premiumMetronome": "Metronome with custom rhythms and patterns",
+    "premiumDrums": "Drum machine with 10 styles",
+    "premiumLessons": "All lessons on chords, scales and fretboard"
   },
   "chords": {
     "sectionNote": "Note",

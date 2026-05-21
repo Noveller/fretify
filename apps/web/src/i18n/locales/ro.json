@@ -30,7 +30,11 @@
     "understood": "Am înțeles",
     "premiumFeature": "Funcție premium",
     "signInToAccess": "Autentificare / Înregistrare",
-    "signInHint": "După autentificare poți abona"
+    "signInHint": "După autentificare poți abona",
+    "premiumScales": "Game, moduri și poziții pe grifă",
+    "premiumMetronome": "Metronom cu ritmuri și tipare personalizate",
+    "premiumDrums": "Mașină de tobe cu 10 stiluri",
+    "premiumLessons": "Toate lecțiile despre acorduri, game și grifă"
   },
   "chords": {
     "sectionNote": "Notă",
