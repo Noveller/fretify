@@ -12,6 +12,9 @@ import { DrumMachine } from './components/DrumMachine';
 import { AboutView } from './components/AboutView';
 import { ThemeToggle } from './components/ThemeToggle';
 import { SafariBanner } from './components/SafariBanner';
+import { AuthModal } from './components/AuthModal';
+import { PremiumGate } from './components/PremiumGate';
+import { useAuthContext } from './lib/AuthContext';
 import { setLanguage, LANGUAGES } from './i18n';
 
 const BASE_URL = 'https://fretify.online';
@@ -90,6 +93,8 @@ function ChordsPage() {
 
 export function App() {
   const { t, i18n } = useTranslation();
+  const { user, signOut } = useAuthContext();
+  const [showAuth, setShowAuth] = useState(false);
 
   const TABS = [
     { to: '/chords',    label: t('nav.chords')    },
@@ -163,19 +168,37 @@ export function App() {
             ))}
           </div>
 
+          {/* Auth button */}
+          {user ? (
+            <button onClick={signOut}
+              className="text-xs font-medium hover:opacity-70 transition-opacity hidden sm:block"
+              style={{ color: 'var(--color-on-surface-muted)' }}>
+              {user.email?.split('@')[0]}
+            </button>
+          ) : (
+            <button onClick={() => setShowAuth(true)}
+              className="hidden sm:block px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
+              style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-on-surface)',
+                border: '1px solid var(--color-fret)' }}>
+              Войти
+            </button>
+          )}
+
           <ThemeToggle />
         </div>
       </header>
+
+      {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
 
       {/* Main */}
       <main className="flex-1 flex flex-col items-center px-3 sm:px-4 pt-6 sm:pt-10 pb-24 sm:pb-12 gap-6 sm:gap-10">
         <Routes>
           <Route path="/"          element={<Navigate to="/chords" replace />} />
           <Route path="/chords"    element={<ChordsPage />} />
-          <Route path="/scales"    element={<ScaleView />} />
-          <Route path="/metronome" element={<Metronome />} />
-          <Route path="/drums"     element={<DrumMachine />} />
-          <Route path="/lessons"   element={<LessonsView />} />
+          <Route path="/scales"    element={<PremiumGate feature="Гаммы, лады и позиции на грифе"><ScaleView /></PremiumGate>} />
+          <Route path="/metronome" element={<PremiumGate feature="Метроном с кастомными ритмами и паттернами"><Metronome /></PremiumGate>} />
+          <Route path="/drums"     element={<PremiumGate feature="Драм-машина с 10 стилями"><DrumMachine /></PremiumGate>} />
+          <Route path="/lessons"   element={<PremiumGate feature="Все уроки по аккордам, гаммам и грифу"><LessonsView /></PremiumGate>} />
           <Route path="/about"     element={<AboutView />} />
         </Routes>
       </main>
