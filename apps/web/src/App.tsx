@@ -180,7 +180,7 @@ export function App() {
               className="hidden sm:block px-3 py-1.5 rounded-lg text-xs font-medium transition-all hover:opacity-80"
               style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-on-surface)',
                 border: '1px solid var(--color-fret)' }}>
-              Войти
+              {t('common.signIn')}
             </button>
           )}
 

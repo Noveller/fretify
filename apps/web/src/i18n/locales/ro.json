@@ -18,7 +18,19 @@
     "support": "Susține",
     "exit": "Ieși",
     "retry": "Repetă",
-    "continue": "Continuare"
+    "continue": "Continuare",
+    "signIn": "Autentificare",
+    "signOut": "Deconectare",
+    "signUp": "Înregistrare",
+    "email": "Email",
+    "password": "Parolă",
+    "noAccount": "Nu ai cont? Înregistrează-te",
+    "hasAccount": "Ai deja cont? Autentifică-te",
+    "confirmationSent": "Email de confirmare trimis la",
+    "understood": "Am înțeles",
+    "premiumFeature": "Funcție premium",
+    "signInToAccess": "Autentificare / Înregistrare",
+    "signInHint": "După autentificare poți abona"
   },
   "chords": {
     "sectionNote": "Notă",

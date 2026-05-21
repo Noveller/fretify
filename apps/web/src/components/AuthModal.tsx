@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuthContext } from '../lib/AuthContext';
 
 interface Props {
@@ -6,6 +7,7 @@ interface Props {
 }
 
 export function AuthModal({ onClose }: Props) {
+  const { t } = useTranslation();
   const { signIn, signUp } = useAuthContext();
   const [mode, setMode]       = useState<'signin' | 'signup'>('signin');
   const [email, setEmail]     = useState('');
@@ -38,7 +40,7 @@ export function AuthModal({ onClose }: Props) {
         {/* Header */}
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold" style={{ color: 'var(--color-on-surface)' }}>
-            {mode === 'signin' ? 'Войти' : 'Создать аккаунт'}
+            {mode === 'signin' ? t('common.signIn') : t('common.signUp')}
           </h2>
           <button onClick={onClose} className="text-xl leading-none hover:opacity-60"
             style={{ color: 'var(--color-on-surface-muted)' }}>×</button>
@@ -48,25 +50,25 @@ export function AuthModal({ onClose }: Props) {
           <div className="flex flex-col items-center gap-4 py-4 text-center">
             <div className="text-4xl">📬</div>
             <p className="text-sm" style={{ color: 'var(--color-on-surface-muted)' }}>
-              Письмо с подтверждением отправлено на <strong>{email}</strong>
+              {t('common.confirmationSent')} <strong>{email}</strong>
             </p>
             <button onClick={onClose}
               className="px-6 py-2.5 rounded-xl text-sm font-bold"
               style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }}>
-              Понятно
+              {t('common.understood')}
             </button>
           </div>
         ) : (
           <form onSubmit={submit} className="flex flex-col gap-3">
             <input
-              type="email" placeholder="Email" value={email} required
+              type="email" placeholder={t('common.email')} value={email} required
               onChange={e => setEmail(e.target.value)}
               className="w-full px-4 py-3 rounded-xl text-sm outline-none"
               style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-on-surface)',
                 border: '1px solid var(--color-fret)' }}
             />
             <input
-              type="password" placeholder="Пароль" value={password} required minLength={6}
+              type="password" placeholder={t('common.password')} value={password} required minLength={6}
               onChange={e => setPassword(e.target.value)}
               className="w-full px-4 py-3 rounded-xl text-sm outline-none"
               style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-on-surface)',
@@ -80,14 +82,14 @@ export function AuthModal({ onClose }: Props) {
             <button type="submit" disabled={loading}
               className="w-full py-3 rounded-xl text-sm font-bold transition-all hover:opacity-90 disabled:opacity-50"
               style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }}>
-              {loading ? '...' : mode === 'signin' ? 'Войти' : 'Зарегистрироваться'}
+              {loading ? '...' : mode === 'signin' ? t('common.signIn') : t('common.signUp')}
             </button>
 
             <button type="button"
               onClick={() => { setMode(m => m === 'signin' ? 'signup' : 'signin'); setError(null); }}
               className="text-xs text-center hover:opacity-80"
               style={{ color: 'var(--color-on-surface-muted)' }}>
-              {mode === 'signin' ? 'Нет аккаунта? Зарегистрироваться' : 'Уже есть аккаунт? Войти'}
+              {mode === 'signin' ? t('common.noAccount') : t('common.hasAccount')}
             </button>
           </form>
         )}

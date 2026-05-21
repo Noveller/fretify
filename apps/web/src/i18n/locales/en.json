@@ -18,7 +18,19 @@
     "support": "Support",
     "exit": "Exit",
     "retry": "Retry",
-    "continue": "Continue"
+    "continue": "Continue",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "signUp": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "noAccount": "No account? Sign up",
+    "hasAccount": "Already have an account? Sign in",
+    "confirmationSent": "Confirmation email sent to",
+    "understood": "Got it",
+    "premiumFeature": "Premium feature",
+    "signInToAccess": "Sign in / Register",
+    "signInHint": "After signing in you can subscribe"
   },
   "chords": {
     "sectionNote": "Note",

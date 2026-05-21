@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuthContext } from '../lib/AuthContext';
 import { AuthModal } from './AuthModal';
 
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export function PremiumGate({ children, feature }: Props) {
+  const { t } = useTranslation();
   const { isPremium, loading } = useAuthContext();
   const [showAuth, setShowAuth] = useState(false);
 
@@ -23,7 +25,7 @@ export function PremiumGate({ children, feature }: Props) {
 
         <div>
           <p className="text-lg font-bold mb-1" style={{ color: 'var(--color-on-surface)' }}>
-            Премиум функция
+            {t('common.premiumFeature')}
           </p>
           {feature && (
             <p className="text-sm" style={{ color: 'var(--color-on-surface-muted)' }}>
@@ -37,10 +39,10 @@ export function PremiumGate({ children, feature }: Props) {
             onClick={() => setShowAuth(true)}
             className="w-full py-3 rounded-xl text-sm font-bold transition-all hover:opacity-90"
             style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }}>
-            Войти / Зарегистрироваться
+            {t('common.signInToAccess')}
           </button>
           <p className="text-xs" style={{ color: 'var(--color-on-surface-muted)' }}>
-            После входа вы сможете оформить подписку
+            {t('common.signInHint')}
           </p>
         </div>
       </div>
