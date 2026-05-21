@@ -3,7 +3,7 @@ import type { User } from '@supabase/supabase-js';
 import { supabase } from './supabase';
 
 // DEV FLAG: set to true to bypass premium check locally
-const DEV_PREMIUM = true;
+const DEV_PREMIUM = false;
 
 export interface AuthState {
   user: User | null;

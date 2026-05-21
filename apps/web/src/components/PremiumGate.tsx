@@ -5,13 +5,30 @@ import { AuthModal } from './AuthModal';
 
 interface Props {
   children: React.ReactNode;
-  feature?: string; // short description shown on the gate
+  feature?: string;
 }
 
 export function PremiumGate({ children, feature }: Props) {
   const { t } = useTranslation();
-  const { isPremium, loading } = useAuthContext();
-  const [showAuth, setShowAuth] = useState(false);
+  const { user, isPremium, loading } = useAuthContext();
+  const [showAuth, setShowAuth]           = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+
+  async function handleSubscribe() {
+    if (!user) return;
+    setCheckoutLoading(true);
+    try {
+      const res = await fetch('/api/paddle-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: user.id, email: user.email }),
+      });
+      const { url } = await res.json() as { url?: string };
+      if (url) window.location.href = url;
+    } finally {
+      setCheckoutLoading(false);
+    }
+  }
 
   if (loading) return null;
   if (isPremium) return <>{children}</>;
@@ -35,15 +52,34 @@ export function PremiumGate({ children, feature }: Props) {
         </div>
 
         <div className="flex flex-col gap-3 w-full max-w-xs">
-          <button
-            onClick={() => setShowAuth(true)}
-            className="w-full py-3 rounded-xl text-sm font-bold transition-all hover:opacity-90"
-            style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }}>
-            {t('common.signInToAccess')}
-          </button>
-          <p className="text-xs" style={{ color: 'var(--color-on-surface-muted)' }}>
-            {t('common.signInHint')}
-          </p>
+          {user ? (
+            <>
+              <p className="text-sm font-medium" style={{ color: 'var(--color-on-surface-muted)' }}>
+                {user.email}
+              </p>
+              <button
+                onClick={handleSubscribe}
+                disabled={checkoutLoading}
+                className="w-full py-3 rounded-xl text-sm font-bold transition-all hover:opacity-90 disabled:opacity-50"
+                style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }}
+              >
+                {checkoutLoading ? '...' : t('common.subscribe')}
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => setShowAuth(true)}
+                className="w-full py-3 rounded-xl text-sm font-bold transition-all hover:opacity-90"
+                style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-fg)' }}
+              >
+                {t('common.signInToAccess')}
+              </button>
+              <p className="text-xs" style={{ color: 'var(--color-on-surface-muted)' }}>
+                {t('common.signInHint')}
+              </p>
+            </>
+          )}
         </div>
       </div>
     </>
