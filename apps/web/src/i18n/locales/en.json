@@ -96,7 +96,8 @@
         "subtitle": "Learn to hear and recognize chords by ear",
         "chords-minor": { "title": "Minor chords", "subtitle": "Am · Em · Dm · Bm" },
         "chords-major": { "title": "Major chords", "subtitle": "C · G · D · A · E" },
-        "chords-mixed": { "title": "Major & minor", "subtitle": "Am · Em · C · G · D" }
+        "chords-mixed":   { "title": "Major & minor",   "subtitle": "Am · Em · C · G · D" },
+        "chords-seventh": { "title": "Seventh chords", "subtitle": "Am7 · Em7 · G7 · D7 · Cmaj7" }
       },
       "scales": {
         "title": "Scales",

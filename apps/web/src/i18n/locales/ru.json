@@ -96,7 +96,8 @@
         "subtitle": "Учись слышать и узнавать аккорды на слух",
         "chords-minor": { "title": "Минорные аккорды", "subtitle": "Am · Em · Dm · Bm" },
         "chords-major": { "title": "Мажорные аккорды", "subtitle": "C · G · D · A · E" },
-        "chords-mixed": { "title": "Мажор и минор", "subtitle": "Am · Em · C · G · D" }
+        "chords-mixed":   { "title": "Мажор и минор", "subtitle": "Am · Em · C · G · D" },
+        "chords-seventh": { "title": "Септаккорды",  "subtitle": "Am7 · Em7 · G7 · D7 · Cmaj7" }
       },
       "scales": {
         "title": "Гаммы",

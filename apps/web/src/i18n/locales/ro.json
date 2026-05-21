@@ -96,7 +96,8 @@
         "subtitle": "Învață să auzi și să recunoști acordurile",
         "chords-minor": { "title": "Acorduri minore", "subtitle": "Am · Em · Dm · Bm" },
         "chords-major": { "title": "Acorduri majore", "subtitle": "C · G · D · A · E" },
-        "chords-mixed": { "title": "Major și minor", "subtitle": "Am · Em · C · G · D" }
+        "chords-mixed":   { "title": "Major și minor",    "subtitle": "Am · Em · C · G · D" },
+        "chords-seventh": { "title": "Acorduri de septimă", "subtitle": "Am7 · Em7 · G7 · D7 · Cmaj7" }
       },
       "scales": {
         "title": "Game",
