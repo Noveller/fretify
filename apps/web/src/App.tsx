@@ -10,6 +10,10 @@ import { Metronome } from './components/Metronome';
 import { LessonsView } from './components/LessonsView';
 import { DrumMachine } from './components/DrumMachine';
 import { AboutView } from './components/AboutView';
+import { PricingView } from './components/PricingView';
+import { TermsView } from './components/TermsView';
+import { PrivacyView } from './components/PrivacyView';
+import { RefundView } from './components/RefundView';
 import { ThemeToggle } from './components/ThemeToggle';
 import { SafariBanner } from './components/SafariBanner';
 import { AuthModal } from './components/AuthModal';
@@ -200,6 +204,10 @@ export function App() {
           <Route path="/drums"     element={<PremiumGate feature={t('common.premiumDrums')}><DrumMachine /></PremiumGate>} />
           <Route path="/lessons"   element={<PremiumGate feature={t('common.premiumLessons')}><LessonsView /></PremiumGate>} />
           <Route path="/about"     element={<AboutView />} />
+          <Route path="/pricing"   element={<PricingView />} />
+          <Route path="/terms"     element={<TermsView />} />
+          <Route path="/privacy"   element={<PrivacyView />} />
+          <Route path="/refund"    element={<RefundView />} />
         </Routes>
       </main>
 
